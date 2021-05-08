@@ -1,13 +1,85 @@
 package myAdapter;
 
+import java.security.Key;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.NoSuchElementException;
-import java.util.Vector;
 
 public class MapAdapter implements HMap
 {
     private Hashtable hashMap = new Hashtable();
+
+    @Override
+    public void clear()
+    {
+
+    }
+
+    @Override
+    public boolean containsKey(Object key)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean containsValue(Object value)
+    {
+        return false;
+    }
+
+    @Override
+    public HSet entrySet()
+    {
+        return new EntrySet(this);
+    }
+
+    @Override
+    public Object get(Object key)
+    {
+        return null;
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return false;
+    }
+
+    @Override
+    public HSet keySet()
+    {
+        return new KeySet(this);
+    }
+
+    @Override
+    public Object put(Object key, Object value)
+    {
+        return null;
+    }
+
+    @Override
+    public void putAll(HMap t)
+    {
+
+    }
+
+    @Override
+    public Object remove(Object key)
+    {
+        return null;
+    }
+
+    @Override
+    public int size()
+    {
+        return 0;
+    }
+
+    @Override
+    public HCollection values()
+    {
+        return new ValuesCollection(this);
+    }
 
     private static class Entry implements HMap.Entry
     {
@@ -59,235 +131,9 @@ public class MapAdapter implements HMap
         }
     }
 
-    /*
     private class EntrySet implements HSet
     {
-        private Vector vectorC = null;
-
-        private class HIteratorClass implements HIterator
-        {
-            protected Vector iter = null;
-            protected int current = 0;
-            protected boolean doneNext = false;
-
-            public HIteratorClass()
-            {
-                iter = vectorC;
-            }
-
-            @Override
-            public boolean hasNext()
-            {
-                return current < iter.size();
-            }
-
-            @Override
-            public Object next() throws NoSuchElementException
-            {
-                if (!hasNext())
-                    throw new NoSuchElementException();
-
-                doneNext = true;
-                return iter.elementAt(current++);
-            }
-
-            @Override
-            public void remove() throws IllegalStateException
-            {
-                if (!doneNext)
-                    throw new IllegalStateException();
-
-                iter.removeElementAt(--current);
-                doneNext = false;
-            }
-        }
-
-        public EntrySet()
-        {
-            vectorC = new Vector();
-        }
-
-        @Override
-        public boolean add(Object o)
-        {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public boolean addAll(HCollection c)
-        {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void clear()
-        {
-            vectorC.removeAllElements();
-        }
-
-        @Override
-        public boolean contains(Object o)
-        {
-            if (o == null)
-                throw new NullPointerException();
-
-            return vectorC.contains(o);
-        }
-
-        @Override
-        public boolean containsAll(HCollection c)
-        {
-            if (c == null)
-                throw new NullPointerException();
-
-            HIterator iter = c.iterator();
-            HIterator iterCheck = c.iterator();
-
-            while (iterCheck.hasNext())
-                if (iterCheck.next() == null)
-                    throw new NullPointerException();
-
-            while (iter.hasNext())
-                if (!vectorC.contains(iter.next()))
-                    return false;
-
-            return true;
-        }
-
-        @Override
-        public boolean isEmpty()
-        {
-            return vectorC.size() == 0;
-        }
-
-        @Override
-        public HIterator iterator()
-        {
-            return new HIteratorClass();
-        }
-
-        @Override
-        public boolean remove(Object o)
-        {
-            if (o == null)
-                throw new NullPointerException();
-
-            return vectorC.removeElement(o);
-        }
-
-        @Override
-        public boolean removeAll(HCollection c)
-        {
-            if (c == null)
-                throw new NullPointerException();
-
-            boolean hasChanged = false;
-            HIterator iter = c.iterator();
-            HIterator iterCheck = c.iterator();
-
-            while (iterCheck.hasNext())
-                if (iterCheck.next() == null)
-                    throw new NullPointerException();
-
-            while (iter.hasNext())
-            {
-                Object tmp = iter.next();
-                if (vectorC.contains(tmp))
-                {
-                    vectorC.removeElement(tmp); //redundant?
-                    hasChanged = true;
-                }
-            }
-
-            return hasChanged;
-        }
-
-        @Override
-        public boolean retainAll(HCollection c)
-        {
-            if (c == null)
-                throw new NullPointerException();
-
-            boolean hasChanged = false;
-            HIterator iter = c.iterator();
-            HIterator iterCheck = c.iterator();
-
-            while (iterCheck.hasNext())
-                if (iterCheck.next() == null)
-                    throw new NullPointerException();
-
-            while (iter.hasNext())
-            {
-                Object tmp = iter.next();
-                if (!vectorC.contains(tmp))
-                {
-                    vectorC.removeElement(tmp); //redundant?
-                    hasChanged = true;
-                }
-            }
-
-            return hasChanged;
-        }
-
-        @Override
-        public int size()
-        {
-            return vectorC.size();
-        }
-
-        @Override
-        public int hashCode()
-        {
-            int hash = 0;
-            for (int i = 1; i < vectorC.size() - 1; i++)
-                hash += vectorC.elementAt(i).hashCode() * i;
-
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object o)
-        {
-            int hash = 0;
-            for (int i = 1; i < vectorC.size() - 1; i++)
-                hash += vectorC.elementAt(i).hashCode() * i;
-
-            return o.hashCode() == hash;
-        }
-
-        @Override
-        public Object[] toArray()
-        {
-            Object[] tmp = new Object[vectorC.size()];
-
-            vectorC.copyInto(tmp);
-
-            return tmp;
-        }
-
-        @Override
-        public Object[] toArray(Object[] a)
-        {
-            if (a == null)
-                throw new NullPointerException();
-
-            if (a.length < vectorC.size())
-            {
-                Object[] tmp = new Object[vectorC.size()];
-                vectorC.copyInto(tmp);
-
-                return tmp;
-            } else
-                vectorC.copyInto(a);
-
-            return a;
-        }
-    }
-     */
-
-    private class EntrySet implements HSet
-    {
-        private final MapAdapter hashTable;
+        private MapAdapter hashTable;
 
         private class HIteratorClass implements HIterator
         {
@@ -587,38 +433,46 @@ public class MapAdapter implements HMap
             if (o == null)
                 throw new NullPointerException();
 
-            if (!(o instanceof Entry))
+            if (!(o instanceof EntrySet))
                 throw new ClassCastException();
 
-            Entry obj = (Entry) o;
+            EntrySet es = (EntrySet) o;
+            HIterator iter = es.iterator();
 
-            if (obj.getKey() == null || obj.getValue() == null)
-                throw new NullPointerException();
+            Entry tmp = null;
+            while (iter.hasNext())
+            {
+                tmp = (Entry) iter.next();
 
-            EntrySet tmp = (EntrySet) o;
-            return this.hashCode() == tmp.hashCode();
+                if (tmp.getKey() == null || tmp.getValue() == null)
+                    throw new NullPointerException();
+            }
+
+            return this.hashCode() == es.hashCode();
         }
     }
 
-    private class KeysSet implements HSet
+    private class KeySet implements HSet
     {
-        private Vector vectorC = null;
+        private MapAdapter hashTable;
 
         private class HIteratorClass implements HIterator
         {
-            protected Vector iter = null;
-            protected int current = 0;
-            protected boolean doneNext = false;
+            protected MapAdapter iter = null;
+            protected Object lastKey;
+            protected Enumeration keys;
 
-            public HIteratorClass()
+            public HIteratorClass(MapAdapter map)
             {
-                iter = vectorC;
+                iter = map;
+                keys = map.hashMap.keys();
+                lastKey = null;
             }
 
             @Override
             public boolean hasNext()
             {
-                return current < iter.size();
+                return keys.hasMoreElements();
             }
 
             @Override
@@ -627,24 +481,25 @@ public class MapAdapter implements HMap
                 if (!hasNext())
                     throw new NoSuchElementException();
 
-                doneNext = true;
-                return iter.elementAt(current++);
+                lastKey = keys.nextElement();
+
+                return lastKey;
             }
 
             @Override
             public void remove() throws IllegalStateException
             {
-                if (!doneNext)
+                if (lastKey == null)
                     throw new IllegalStateException();
 
-                iter.removeElementAt(--current);
-                doneNext = false;
+                iter.remove(lastKey);
+                lastKey = null;
             }
         }
 
-        public KeysSet()
+        public KeySet(MapAdapter m)
         {
-            vectorC = new Vector();
+            hashTable = m;
         }
 
         @Override
@@ -662,7 +517,7 @@ public class MapAdapter implements HMap
         @Override
         public void clear()
         {
-            vectorC.removeAllElements();
+            hashTable.clear();
         }
 
         @Override
@@ -671,7 +526,7 @@ public class MapAdapter implements HMap
             if (o == null)
                 throw new NullPointerException();
 
-            return vectorC.contains(o);
+            return hashTable.containsKey(o);
         }
 
         @Override
@@ -680,15 +535,16 @@ public class MapAdapter implements HMap
             if (c == null)
                 throw new NullPointerException();
 
-            HIterator iter = c.iterator();
             HIterator iterCheck = c.iterator();
 
             while (iterCheck.hasNext())
                 if (iterCheck.next() == null)
                     throw new NullPointerException();
 
+            HIterator iter = c.iterator();
+
             while (iter.hasNext())
-                if (!vectorC.contains(iter.next()))
+                if (!contains(iter.next()))
                     return false;
 
             return true;
@@ -697,13 +553,13 @@ public class MapAdapter implements HMap
         @Override
         public boolean isEmpty()
         {
-            return vectorC.size() == 0;
+            return hashTable.isEmpty();
         }
 
         @Override
         public HIterator iterator()
         {
-            return new HIteratorClass();
+            return new HIteratorClass(hashTable);
         }
 
         @Override
@@ -712,7 +568,13 @@ public class MapAdapter implements HMap
             if (o == null)
                 throw new NullPointerException();
 
-            return vectorC.removeElement(o);
+            if (this.contains(o))
+            {
+                MapAdapter.this.remove(o);
+                return true;
+            }
+
+            return false;
         }
 
         @Override
@@ -721,25 +583,23 @@ public class MapAdapter implements HMap
             if (c == null)
                 throw new NullPointerException();
 
-            boolean hasChanged = false;
-            HIterator iter = c.iterator();
             HIterator iterCheck = c.iterator();
-
             while (iterCheck.hasNext())
                 if (iterCheck.next() == null)
                     throw new NullPointerException();
 
+            HIterator iter = c.iterator();
+            int size = hashTable.size();
+
+            Object tmp = null;
             while (iter.hasNext())
             {
-                Object tmp = iter.next();
-                if (vectorC.contains(tmp))
-                {
-                    vectorC.removeElement(tmp); //redundant?
-                    hasChanged = true;
-                }
+                tmp = iter.next();
+                if (contains(tmp))
+                    remove(tmp);
             }
 
-            return hasChanged;
+            return size != hashTable.size();
         }
 
         @Override
@@ -748,59 +608,41 @@ public class MapAdapter implements HMap
             if (c == null)
                 throw new NullPointerException();
 
-            boolean hasChanged = false;
-            HIterator iter = c.iterator();
             HIterator iterCheck = c.iterator();
-
             while (iterCheck.hasNext())
                 if (iterCheck.next() == null)
                     throw new NullPointerException();
 
+            HIterator iter = iterator();
+            int size = hashTable.size();
+
+            Object tmp = null;
             while (iter.hasNext())
             {
-                Object tmp = iter.next();
-                if (!vectorC.contains(tmp))
-                {
-                    vectorC.removeElement(tmp); //redundant?
-                    hasChanged = true;
-                }
+                tmp = iter.next();
+                if (!c.contains(tmp))
+                    remove(tmp);
             }
 
-            return hasChanged;
+            return size != hashTable.size();
         }
 
         @Override
         public int size()
         {
-            return vectorC.size();
-        }
-
-        @Override
-        public int hashCode()
-        {
-            int hash = 0;
-            for (int i = 1; i < vectorC.size() - 1; i++)
-                hash += vectorC.elementAt(i).hashCode() * i;
-
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object o)
-        {
-            int hash = 0;
-            for (int i = 1; i < vectorC.size() - 1; i++)
-                hash += vectorC.elementAt(i).hashCode() * i;
-
-            return o.hashCode() == hash;
+            return hashTable.size();
         }
 
         @Override
         public Object[] toArray()
         {
-            Object[] tmp = new Object[vectorC.size()];
+            Object[] tmp = new Object[this.size()];
 
-            vectorC.copyInto(tmp);
+            HIterator iter = this.iterator();
+
+            int j = 0;
+            while (iter.hasNext())
+                tmp[j++] = iter.next();
 
             return tmp;
         }
@@ -811,38 +653,79 @@ public class MapAdapter implements HMap
             if (a == null)
                 throw new NullPointerException();
 
-            if (a.length < vectorC.size())
-            {
-                Object[] tmp = new Object[vectorC.size()];
-                vectorC.copyInto(tmp);
+            if (a.length < size())
+                return toArray();
 
-                return tmp;
-            } else
-                vectorC.copyInto(a);
+            HIterator iter = this.iterator();
+
+            int j = 0;
+            while (iter.hasNext())
+                a[j++] = iter.next();
 
             return a;
         }
+
+        @Override
+        public int hashCode()
+        {
+            HIterator iter = this.iterator();
+
+            int hash = 0;
+            Object tmp = null;
+
+            while (iter.hasNext())
+            {
+                tmp = iter.next();
+                if (tmp == null)
+                    hash += 0;
+                else
+                    hash += tmp.hashCode();
+            }
+
+            return hash;
+        }
+
+        @Override
+        public boolean equals(Object o)
+        {
+            if (o == null)
+                throw new NullPointerException();
+
+            if (!(o instanceof KeySet))
+                throw new ClassCastException();
+
+            KeySet ks = (KeySet) o;
+            HIterator iter = ks.iterator();
+
+            while (iter.hasNext())
+                if (iter.next() == null)
+                    throw new NullPointerException();
+
+            return this.hashCode() == ks.hashCode();
+        }
     }
 
-    private class CollectionValues implements HCollection
+    private class ValuesCollection implements HCollection
     {
-        private Vector vectorC = null;
+        private MapAdapter hashTable;
 
         private class HIteratorClass implements HIterator
         {
-            protected Vector iter = null;
-            protected int current = 0;
-            protected boolean doneNext = false;
+            protected MapAdapter iter = null;
+            protected Object lastKey;
+            protected Enumeration keys;
 
-            public HIteratorClass()
+            public HIteratorClass(MapAdapter map)
             {
-                iter = vectorC;
+                iter = map;
+                keys = map.hashMap.keys();
+                lastKey = null;
             }
 
             @Override
             public boolean hasNext()
             {
-                return current < iter.size();
+                return keys.hasMoreElements();
             }
 
             @Override
@@ -851,24 +734,25 @@ public class MapAdapter implements HMap
                 if (!hasNext())
                     throw new NoSuchElementException();
 
-                doneNext = true;
-                return iter.elementAt(current++);
+                lastKey = keys.nextElement();
+
+                return new Entry(lastKey, iter.get(lastKey));
             }
 
             @Override
             public void remove() throws IllegalStateException
             {
-                if (!doneNext)
+                if (lastKey == null)
                     throw new IllegalStateException();
 
-                iter.removeElementAt(--current);
-                doneNext = false;
+                iter.remove(lastKey);
+                lastKey = null;
             }
         }
 
-        public CollectionValues()
+        public ValuesCollection(MapAdapter m)
         {
-            vectorC = new Vector();
+            hashTable = m;
         }
 
         @Override
@@ -886,7 +770,7 @@ public class MapAdapter implements HMap
         @Override
         public void clear()
         {
-            vectorC.removeAllElements();
+            hashTable.clear();
         }
 
         @Override
@@ -895,7 +779,17 @@ public class MapAdapter implements HMap
             if (o == null)
                 throw new NullPointerException();
 
-            return vectorC.contains(o);
+            HIterator iter = iterator();
+
+            Entry tmp = null;
+            while(iter.hasNext())
+            {
+                tmp = (Entry) iter.next();
+                if (tmp.getValue() == o)
+                    return true;
+            }
+
+            return false;
         }
 
         @Override
@@ -904,16 +798,20 @@ public class MapAdapter implements HMap
             if (c == null)
                 throw new NullPointerException();
 
-            HIterator iter = c.iterator();
-            HIterator iterCheck = c.iterator();
+            HIterator iterCheckClass = c.iterator();
 
+            HIterator iterCheck = c.iterator();
             while (iterCheck.hasNext())
                 if (iterCheck.next() == null)
                     throw new NullPointerException();
 
+            HIterator iter = c.iterator();
+
             while (iter.hasNext())
-                if (!vectorC.contains(iter.next()))
+            {
+                if (!contains(iter.next()))
                     return false;
+            }
 
             return true;
         }
@@ -921,13 +819,13 @@ public class MapAdapter implements HMap
         @Override
         public boolean isEmpty()
         {
-            return vectorC.size() == 0;
+            return hashTable.isEmpty();
         }
 
         @Override
         public HIterator iterator()
         {
-            return new HIteratorClass();
+            return new HIteratorClass(hashTable);
         }
 
         @Override
@@ -936,7 +834,20 @@ public class MapAdapter implements HMap
             if (o == null)
                 throw new NullPointerException();
 
-            return vectorC.removeElement(o);
+            HIterator iter = iterator();
+
+            Entry tmp = null;
+            while(iter.hasNext())
+            {
+                tmp = (Entry) iter.next();
+                if (tmp.getValue() == o)
+                {
+                    iter.remove();
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         @Override
@@ -945,25 +856,23 @@ public class MapAdapter implements HMap
             if (c == null)
                 throw new NullPointerException();
 
-            boolean hasChanged = false;
-            HIterator iter = c.iterator();
             HIterator iterCheck = c.iterator();
-
             while (iterCheck.hasNext())
                 if (iterCheck.next() == null)
                     throw new NullPointerException();
 
+            HIterator iter = c.iterator();
+            int size = hashTable.size();
+
+            Object tmp = null;
             while (iter.hasNext())
             {
-                Object tmp = iter.next();
-                if (vectorC.contains(tmp))
-                {
-                    vectorC.removeElement(tmp); //redundant?
-                    hasChanged = true;
-                }
+                tmp = ((Entry) iter.next()).getValue();
+                if (contains(tmp))
+                    remove(tmp);
             }
 
-            return hasChanged;
+            return size != hashTable.size();
         }
 
         @Override
@@ -972,59 +881,44 @@ public class MapAdapter implements HMap
             if (c == null)
                 throw new NullPointerException();
 
-            boolean hasChanged = false;
-            HIterator iter = c.iterator();
             HIterator iterCheck = c.iterator();
-
             while (iterCheck.hasNext())
                 if (iterCheck.next() == null)
                     throw new NullPointerException();
 
+            HIterator iter = iterator();
+            int size = hashTable.size();
+
+            Object tmp = null;
             while (iter.hasNext())
             {
-                Object tmp = iter.next();
-                if (!vectorC.contains(tmp))
-                {
-                    vectorC.removeElement(tmp); //redundant?
-                    hasChanged = true;
-                }
+                tmp = ((Entry) iter.next()).getValue();
+                if (!c.contains(tmp))
+                    remove(tmp);
             }
 
-            return hasChanged;
+            return size != hashTable.size();
         }
 
         @Override
         public int size()
         {
-            return vectorC.size();
-        }
-
-        @Override
-        public int hashCode()
-        {
-            int hash = 0;
-            for (int i = 1; i < vectorC.size() - 1; i++)
-                hash += vectorC.elementAt(i).hashCode() * i;
-
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object o)
-        {
-            int hash = 0;
-            for (int i = 1; i < vectorC.size() - 1; i++)
-                hash += vectorC.elementAt(i).hashCode() * i;
-
-            return o.hashCode() == hash;
+            return hashTable.size();
         }
 
         @Override
         public Object[] toArray()
         {
-            Object[] tmp = new Object[vectorC.size()];
+            Object[] tmp = new Object[this.size()];
 
-            vectorC.copyInto(tmp);
+            HIterator iter = this.iterator();
+
+            int j = 0;
+            while (iter.hasNext())
+            {
+                Entry e = (Entry) iter.next();
+                tmp[j++] = e.getValue();
+            }
 
             return tmp;
         }
@@ -1035,88 +929,62 @@ public class MapAdapter implements HMap
             if (a == null)
                 throw new NullPointerException();
 
-            if (a.length < vectorC.size())
-            {
-                Object[] tmp = new Object[vectorC.size()];
-                vectorC.copyInto(tmp);
+            if (a.length < size())
+                return toArray();
 
-                return tmp;
-            } else
-                vectorC.copyInto(a);
+            HIterator iter = this.iterator();
+
+            int j = 0;
+            while (iter.hasNext())
+            {
+                Entry e = (Entry) iter.next();
+                a[j++] = e.getValue();
+            }
 
             return a;
         }
-    }
 
-    @Override
-    public void clear()
-    {
+        @Override
+        public int hashCode()
+        {
+            HIterator iter = this.iterator();
 
-    }
+            int hash = 0;
+            Object tmp = null;
 
-    @Override
-    public boolean containsKey(Object key)
-    {
-        return false;
-    }
+            while (iter.hasNext())
+            {
+                tmp = ((Entry) iter.next()).getValue();
+                if (tmp == null)
+                    hash += 0;
+                else
+                    hash += tmp.hashCode();
+            }
 
-    @Override
-    public boolean containsValue(Object value)
-    {
-        return false;
-    }
+            return hash;
+        }
 
-    @Override
-    public HSet entrySet()
-    {
-        return null;
-    }
+        @Override
+        public boolean equals(Object o)
+        {
+            if (o == null)
+                throw new NullPointerException();
 
-    @Override
-    public Object get(Object key)
-    {
-        return null;
-    }
+            if (!(o instanceof ValuesCollection))
+                throw new ClassCastException();
 
-    @Override
-    public boolean isEmpty()
-    {
-        return false;
-    }
+            ValuesCollection vc = (ValuesCollection) o;
+            HIterator iter = vc.iterator();
 
-    @Override
-    public HSet keySet()
-    {
-        return null;
-    }
+            Object tmp = null;
+            while (iter.hasNext())
+            {
+                tmp = ((Entry) iter.next()).getValue();
+                if (tmp == null)
+                    throw new NullPointerException();
+            }
 
-    @Override
-    public Object put(Object key, Object value)
-    {
-        return null;
-    }
-
-    @Override
-    public void putAll(HMap t)
-    {
-
-    }
-
-    @Override
-    public Object remove(Object key)
-    {
-        return null;
-    }
-
-    @Override
-    public int size()
-    {
-        return 0;
-    }
-
-    @Override
-    public HCollection values()
-    {
-        return null;
+            return this.hashCode() == vc.hashCode();
+        }
     }
 }

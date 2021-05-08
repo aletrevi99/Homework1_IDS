@@ -7,161 +7,6 @@ public class ListAdapter implements HList
 {
     private Vector vectorList;
 
-    private class HIteratorClass implements HIterator
-    {
-        protected Vector iter = null;
-        protected int current;
-        protected boolean doneNext;
-
-        public HIteratorClass(Vector v)
-        {
-            this(v, 0);
-            doneNext = false;
-        }
-
-        public HIteratorClass(Vector v, int index)
-        {
-            iter = v;
-            current = index;
-            doneNext = false;
-        }
-
-        @Override
-        public boolean hasNext()
-        {
-            return current < iter.size();
-        }
-
-        @Override
-        public Object next() throws NoSuchElementException
-        {
-            if (!hasNext())
-                throw new NoSuchElementException();
-
-            doneNext = true;
-            return iter.elementAt(current++);
-        }
-
-        @Override
-        public void remove() throws IllegalStateException
-        {
-            if (!doneNext)
-                throw new IllegalStateException();
-
-            iter.removeElementAt(--current);
-            doneNext = false;
-        }
-    }
-
-    private class HListIteratorClass extends HIteratorClass implements HListIterator
-    {
-        protected boolean donePrev;
-
-        public HListIteratorClass(Vector v)
-        {
-            super(v);
-            donePrev = false;
-        }
-
-        public HListIteratorClass(Vector v, int index)
-        {
-            super(v, index);
-            donePrev = false;
-        }
-
-        @Override
-        public void add(Object o)
-        {
-            if (o == null)
-                throw new NullPointerException();
-
-            iter.insertElementAt(o, current++);
-            doneNext = donePrev = false;
-        }
-
-        @Override
-        public boolean hasNext()
-        {
-            return super.hasNext();
-        }
-
-        @Override
-        public boolean hasPrevious()
-        {
-            return current - 1 >= 0;
-        }
-
-        @Override
-        public Object next()
-        {
-            if (!hasNext())
-                throw new NoSuchElementException();
-
-            doneNext = true;
-            donePrev = false;
-            return super.next();
-        }
-
-        @Override
-        public int nextIndex()
-        {
-            return current;
-        }
-
-        @Override
-        public Object previous() throws NoSuchElementException
-        {
-            if (!hasPrevious())
-                throw new NoSuchElementException();
-
-            donePrev = true;
-            doneNext = false;
-
-            return iter.elementAt(--current);
-        }
-
-        @Override
-        public int previousIndex()
-        {
-            return current - 1;
-        }
-
-        @Override
-        public void remove()
-        {
-            if (!doneNext && !donePrev)
-                throw new IllegalStateException();
-            else if (donePrev)
-            {
-                iter.removeElementAt(current);
-                donePrev = doneNext = false;
-
-                return;
-            } else
-                super.remove();
-        }
-
-        @Override
-        public void set(Object o)
-        {
-            if (o == null)
-                throw new NullPointerException();
-
-            if (iter.isEmpty())
-            {
-                add(o);
-                return;
-            }
-
-            if (!doneNext && !donePrev)
-                throw new IllegalStateException();
-            else if (doneNext)
-                iter.setElementAt(o, current - 1);
-            else if (donePrev)
-                iter.setElementAt(o, current);
-        }
-    }
-
     public ListAdapter()
     {
         this(new Vector());
@@ -522,6 +367,161 @@ public class ListAdapter implements HList
         return a;
     }
 
+
+    private class HIteratorClass implements HIterator
+    {
+        protected Vector iter = null;
+        protected int current;
+        protected boolean doneNext;
+
+        public HIteratorClass(Vector v)
+        {
+            this(v, 0);
+            doneNext = false;
+        }
+
+        public HIteratorClass(Vector v, int index)
+        {
+            iter = v;
+            current = index;
+            doneNext = false;
+        }
+
+        @Override
+        public boolean hasNext()
+        {
+            return current < iter.size();
+        }
+
+        @Override
+        public Object next() throws NoSuchElementException
+        {
+            if (!hasNext())
+                throw new NoSuchElementException();
+
+            doneNext = true;
+            return iter.elementAt(current++);
+        }
+
+        @Override
+        public void remove() throws IllegalStateException
+        {
+            if (!doneNext)
+                throw new IllegalStateException();
+
+            iter.removeElementAt(--current);
+            doneNext = false;
+        }
+    }
+
+    private class HListIteratorClass extends HIteratorClass implements HListIterator
+    {
+        protected boolean donePrev;
+
+        public HListIteratorClass(Vector v)
+        {
+            super(v);
+            donePrev = false;
+        }
+
+        public HListIteratorClass(Vector v, int index)
+        {
+            super(v, index);
+            donePrev = false;
+        }
+
+        @Override
+        public void add(Object o)
+        {
+            if (o == null)
+                throw new NullPointerException();
+
+            iter.insertElementAt(o, current++);
+            doneNext = donePrev = false;
+        }
+
+        @Override
+        public boolean hasNext()
+        {
+            return super.hasNext();
+        }
+
+        @Override
+        public boolean hasPrevious()
+        {
+            return current - 1 >= 0;
+        }
+
+        @Override
+        public Object next()
+        {
+            if (!hasNext())
+                throw new NoSuchElementException();
+
+            doneNext = true;
+            donePrev = false;
+            return super.next();
+        }
+
+        @Override
+        public int nextIndex()
+        {
+            return current;
+        }
+
+        @Override
+        public Object previous() throws NoSuchElementException
+        {
+            if (!hasPrevious())
+                throw new NoSuchElementException();
+
+            donePrev = true;
+            doneNext = false;
+
+            return iter.elementAt(--current);
+        }
+
+        @Override
+        public int previousIndex()
+        {
+            return current - 1;
+        }
+
+        @Override
+        public void remove()
+        {
+            if (!doneNext && !donePrev)
+                throw new IllegalStateException();
+            else if (donePrev)
+            {
+                iter.removeElementAt(current);
+                donePrev = doneNext = false;
+
+                return;
+            } else
+                super.remove();
+        }
+
+        @Override
+        public void set(Object o)
+        {
+            if (o == null)
+                throw new NullPointerException();
+
+            if (iter.isEmpty())
+            {
+                add(o);
+                return;
+            }
+
+            if (!doneNext && !donePrev)
+                throw new IllegalStateException();
+            else if (doneNext)
+                iter.setElementAt(o, current - 1);
+            else if (donePrev)
+                iter.setElementAt(o, current);
+        }
+    }
 
     private class SubList extends ListAdapter
     {

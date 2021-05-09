@@ -1,6 +1,5 @@
 package myAdapter;
 
-
 /**
  * An object that maps keys to values. A map cannot contain duplicate keys; each key can map to at most one value.
  * <p>
@@ -40,19 +39,6 @@ package myAdapter;
  */
 public interface HMap
 {
-    public static interface Entry
-    {
-        boolean equals(Object o);
-
-        Object getKey();
-
-        Object getValue();
-
-        int hashCode();
-
-        Object setValue(Object value);
-    }
-
     // Removes all mappings from this map (optional operation).
     void clear();
 
@@ -94,4 +80,22 @@ public interface HMap
 
     // Returns a collection view of the values contained in this map.
     HCollection values();
+
+    public static interface Entry
+    {
+        //     Compares the specified object with this entry for equality.
+        boolean equals(Object o);
+
+        //     Returns the key corresponding to this entry.
+        Object getKey();
+
+        //     Returns the value corresponding to this entry.
+        Object getValue();
+
+        //     Returns the value corresponding to this entry.
+        int hashCode();
+
+        //     Replaces the value corresponding to this entry with the specified value (optional operation).
+        Object setValue(Object value);
+    }
 }

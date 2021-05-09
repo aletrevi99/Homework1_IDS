@@ -1,135 +1,90 @@
 package myTest;
 
 import myAdapter.*;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ListAdapterTest
 {
+    private ListAdapter list;
 
-    @Test
-    public void add()
+    @Before
+    public void initialize()
     {
+        list = new ListAdapter();
     }
 
     @Test
-    public void testAdd()
+    public void initializeTest()
     {
+        assertEquals(0, list.size());
     }
 
     @Test
-    public void addAll()
+    public void testAddIndex()
     {
+        list.add(0, "pippo");
+        list.add(1, "pluto");
+        list.add(list.size(), 333);
+
+        assertEquals(3, list.size());
+        assertEquals(333, list.get(list.size() -1));
+        assertEquals("pippo", list.get(0));
+
+        assertEquals(444, list.get(0));
+        assertEquals(4, list.size());
+
+        assertThrows(NullPointerException.class, () -> {list.add(0, null);});
+        assertThrows(IndexOutOfBoundsException.class, () -> {list.add(5, "paperino");});
     }
+
+    @Test
+    public void testadd()
+    {
+        assertTrue(list.add("pippo"));
+        assertEquals(1, list.size());
+
+        assertTrue(list.add("pluto"));
+        assertEquals(2, list.size());
+
+        assertTrue(list.add(111));
+        assertEquals(3, list.size());
+
+        assertTrue(list.contains("pluto"));
+        assertTrue(list.contains(111));
+        assertFalse(list.contains("paperino"));
+        assertEquals("pluto", list.get(1));
+        assertEquals(111, list.get(2));
+
+        assertThrows(NullPointerException.class, () -> {list.add(null);});
+    }
+
 
     @Test
     public void testAddAll()
     {
+        assertTrue(list.addAll(getACollection()));
+        assertEquals(10, list.size());
+
+        assertTrue(list.addAll(getACollection()));
+        assertEquals(20, list.size());
+
+        assertTrue(list.add("pippo"));
+        assertEquals("pippo", list.get(20));
     }
 
-    @Test
-    public void clear()
+    private ListAdapter getACollection()
     {
+        ListAdapter l = new ListAdapter();
+        for (int i = 0; i < 5; i++)
+            l.add(i, i*i);
+
+        for (int i = 5; i < 10; i++)
+            l.add(i, "string number " + (i-4));
+
+        return l;
     }
 
-    @Test
-    public void contains()
-    {
-    }
-
-    @Test
-    public void containsAll()
-    {
-    }
-
-    @Test
-    public void testEquals()
-    {
-    }
-
-    @Test
-    public void testHashCode()
-    {
-    }
-
-    @Test
-    public void get()
-    {
-    }
-
-    @Test
-    public void indexOf()
-    {
-    }
-
-    @Test
-    public void isEmpty()
-    {
-    }
-
-    @Test
-    public void iterator()
-    {
-    }
-
-    @Test
-    public void lastIndexOf()
-    {
-    }
-
-    @Test
-    public void listIterator()
-    {
-    }
-
-    @Test
-    public void testListIterator()
-    {
-    }
-
-    @Test
-    public void remove()
-    {
-    }
-
-    @Test
-    public void testRemove()
-    {
-    }
-
-    @Test
-    public void removeAll()
-    {
-    }
-
-    @Test
-    public void retainAll()
-    {
-    }
-
-    @Test
-    public void set()
-    {
-    }
-
-    @Test
-    public void size()
-    {
-    }
-
-    @Test
-    public void subList()
-    {
-    }
-
-    @Test
-    public void toArray()
-    {
-    }
-
-    @Test
-    public void testToArray()
-    {
-    }
 }

@@ -304,7 +304,7 @@ public class ListAdapter implements HList
         {
             tmp = iter.next();
             if (!coll.contains(tmp))
-                remove(tmp);
+                iter.remove();
         }
 
         return size != this.size();
@@ -1036,7 +1036,7 @@ public class ListAdapter implements HList
             {
                 tmp = iter.next();
                 if (!coll.contains(tmp))
-                    remove(tmp);
+                    iter.remove();
             }
 
             return size != this.size();

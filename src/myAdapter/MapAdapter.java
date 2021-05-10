@@ -299,7 +299,7 @@ public class MapAdapter implements HMap
             {
                 Entry tmp = (Entry) hashTable.get(obj.getKey());
 
-                return tmp.getValue() == obj.getValue();
+                return tmp.getValue().equals(obj.getValue());
             }
 
             return false;

@@ -367,7 +367,6 @@ public class ListAdapter implements HList
         return a;
     }
 
-
     private class HIteratorClass implements HIterator
     {
         protected Vector iter = null;

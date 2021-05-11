@@ -445,7 +445,7 @@ public class MapAdapter implements HMap
             {
                 tmp = (Entry) iter.next();
                 if (!c.contains(tmp))
-                    remove(tmp);
+                    iter.remove();
             }
 
             return size != hashTable.size();
@@ -703,7 +703,7 @@ public class MapAdapter implements HMap
             {
                 tmp = iter.next();
                 if (!c.contains(tmp))
-                    remove(tmp);
+                    iter.remove();
             }
 
             return size != hashTable.size();
@@ -864,7 +864,7 @@ public class MapAdapter implements HMap
             HIterator iter = iterator();
 
             while(iter.hasNext())
-                if (iter.next() == o)
+                if ((iter.next()).equals(o))
                     return true;
 
             return false;
@@ -964,7 +964,7 @@ public class MapAdapter implements HMap
             {
                 tmp = iter.next();
                 if (!c.contains(tmp))
-                    remove(tmp);
+                    iter.remove();
             }
 
             return size != hashTable.size();

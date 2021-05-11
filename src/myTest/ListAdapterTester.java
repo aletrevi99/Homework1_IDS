@@ -150,8 +150,18 @@ public class ListAdapterTester
     {
         ListAdapter test = getACollection();
 
+        assertFalse(list.containsAll(test));
+
         assertTrue(list.addAll(test));
         assertEquals(10, list.size());
+        assertTrue(list.containsAll(test));
+
+        for (int i = 0; i < list.size(); i++)
+            assertTrue(list.contains(test.get(i)));
+
+        list.add(2, 111);
+        list.add(4, 43531);
+
         assertTrue(list.containsAll(test));
 
         assertThrows(NullPointerException.class, () -> {list.containsAll(null);});
@@ -194,7 +204,7 @@ public class ListAdapterTester
     @Test
     public void getTest()
     {
-        ListAdapter test = new ListAdapter();
+        ListAdapter test = getACollection();
         list.addAll(test);
 
         for (int i = 0; i < list.size() / 2; i++)
@@ -225,9 +235,15 @@ public class ListAdapterTester
     public void isEmptyTest()
     {
         assertTrue(list.isEmpty());
-        list.add(1);
-        assertFalse(list.isEmpty());
+        ListAdapter test = getACollection();
+
+        for (int i = 0; i < test.size(); i++)
+        {
+            assertTrue(list.add(test.get(i)));
+            assertFalse(list.isEmpty());
+        }
         list.clear();
+        assertEquals(0, list.size());
         assertTrue(list.isEmpty());
     }
 
@@ -434,7 +450,7 @@ public class ListAdapterTester
         for (int i = 0; i < 10; i ++)
         {
             list.add(i);
-            count++;
+            assertEquals(++count, list.size());
         }
 
         assertEquals(count, list.size());

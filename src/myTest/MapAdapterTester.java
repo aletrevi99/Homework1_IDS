@@ -1,6 +1,7 @@
 package myTest;
 
 import myAdapter.*;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,18 +13,57 @@ public class MapAdapterTester
 {
     private MapAdapter map;
 
+    /**
+     * Istanzia una nuova MapAdapter prima di ogni test.
+     * */
     @Before
     public void initialize()
     {
         map = new MapAdapter();
     }
 
+    /**
+     * Se a fine di ogni test map non è vuota, viene svuotata.
+     * */
+    @After
+    public void clearList()
+    {
+        if (!map.isEmpty()) map.clear();
+    }
+
+    /**
+     * Test delle pre-condizioni di ogni metodo.
+     * <br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero.
+     * <br><br>
+     * <b>Post-Condizioni</b>: Stampa su terminale i valori di getAMap().
+     * */
     @Test
     public void initializeTest()
     {
         assertEquals(0, map.size());
     }
 
+    /**
+     * Test del metodo     <b>public void clear()</b>
+     *<br><br>
+     * <b>Sommario</b>: Controllo che la dimensione di map sia effettivamente 0 all'inizio del test. Creo una nuova
+     * MapAdapter test e le assegno gli elementi della MapAdapter generata dal metodo privato getAMap(). Aggiungo a map
+     * un gli elementi di test tramite due for; uno per le chiavi numeriche, l'altro per le chivi di tipo string e
+     * controllo che la dimensione sia effettivamente del numero degli elementi
+     * aggiunti, ossia 10. Successivamente chiamo il metodo clear e controllo che la dimensione sia pari a zero e che
+     * quindi la mappa sia stata correttamente svuotata.
+     *<br><br>
+     * <b>Design</b>: corretto svuotamento della mappa riempita con delle mappautre chiave valore (k/v).
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     * metodo clear di Hashtable funzioni.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: il metodo svuoterà correttamente la mappa da qualsiasi mappatura k/v contenuto all'interno portando
+     * la dimensione della mappa a zero.
+     */
     @Test
     public void clearTest()
     {
@@ -42,6 +82,29 @@ public class MapAdapterTester
         assertEquals(0, map.size());
     }
 
+    /**
+     * Test del metodo     <b>public boolean containsKey(Object key)</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo alla mappa map inizialmente vuota uno ad uno le mappature k/v di una MapAdapter test
+     * (generata con il metodo privato getAMap()) ripetutamente in due for, il primo per le mappature con chiavi
+     * numeriche ed il secondo per le mappature con chiavi di tipo string e controllo che alla fine la dimensione
+     * equivalga effettivamente al numero delle mappature
+     * aggiunte, ossia 10. Successivamente controllo che le mappature aggiunte siano effettivamente contenute in essa
+     * tramite due for che scorrono prima le mappature con chiavi numeriche e successivamente le mappature con chiavi
+     * di tipo string. Controllo che ritorni false se gli passo come argomento una chiave non presente nella mappa.
+     * Infine controllo che chiamando il metodo con argomento nullo, lanci NullPointerException.
+     *<br><br>
+     * <b>Design</b>: corretto controllo della presenza di una mappatura k/v nella mappa in base alla chiave fornita. Controllo della
+     * corretta gestione delle eccezioni.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo Mapdapter correttamente inizializzato con dimensione uguale a zero e che il
+     * metodo containsKey di Hashtable funzioni.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornerà true se è presente una mappatura con la chiave passata come
+     * argomento, altrimenti false se non è contenuta.
+     */
     @Test
     public void containsKeyTest()
     {
@@ -65,6 +128,29 @@ public class MapAdapterTester
         assertThrows(NullPointerException.class, () -> {map.containsKey(null);});
     }
 
+    /**
+     * Test del metodo     <b>public boolean containsValue(Object value)</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo alla mappa map inizialmente vuota uno ad uno le mappature k/v di una MapAdapter test
+     * (generata con il metodo privato getAMap()) ripetutamente in due for, il primo per le mappature con chiavi
+     * numeriche ed il secondo per le mappature con chiavi di tipo string e controllo che alla fine la dimensione
+     * equivalga effettivamente al numero delle mappature
+     * aggiunte, ossia 10. Successivamente controllo che le mappature aggiunte siano effettivamente contenute in essa
+     * tramite due for che scorrono prima le mappature con valori di tipo string e successivamente le mappature con valori
+     * numerici. Controllo che ritorni false se gli passo come argomento un valore non presente nella mappa.
+     * Infine controllo che chiamando il metodo con argomento nullo, lanci NullPointerException.
+     *<br><br>
+     * <b>Design</b>: corretto controllo della presenza di almeno una mappatura k/v nella mappa in base al valore fornito. Controllo della
+     * corretta gestione delle eccezioni.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo Mapdapter correttamente inizializzato con dimensione uguale a zero e che il
+     * metodo containsValue di Hashtable funzioni.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornerà true se è presente almeno una mappatura con il valore passato come
+     * argomento, altrimenti false se non è presente.
+     */
     @Test
     public void containsValueTest()
     {
@@ -88,6 +174,21 @@ public class MapAdapterTester
         assertThrows(NullPointerException.class, () -> {map.containsValue(null);});
     }
 
+    /**
+     * Test del metodo     <b>public HSet entrySet()</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo alla mappa map inizialmente vuota tutte le mappature k/v di una MapAdapter
+     * (generata con il metodo privato getAMap()).
+     * Controllo che il metodo entrySet() mi ritorni una HSet non null.
+     *<br><br>
+     * <b>Design</b>: verificare la corretta generazione di un HSet degli Entry di map.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo genera un HSet di tutti gli Entry di map, utilizzabile.
+     */
     @Test
     public void entrySetTest()
     {
@@ -95,26 +196,62 @@ public class MapAdapterTester
         assertNotNull(map.entrySet());
     }
 
+    /**
+     * Test del metodo     <b>public Object get(Object key)</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo un MapAdapter test con il metodo privato getAMap() e lo uso per riempire map. Con due for,
+     * uno per tipo di chiave delle mappature k/v contenute dentro map, controllo che il metodo get ritorni il valore
+     * della mappatura k/v effettivamente contenuta nella mappa con chiave (i) e valore ("stringa " + i) nelle prime 5
+     * posizioni della mappa e chiave ("chiave " + i) e valore (i) nelle altre 5 posizioni della mappa (ossia le
+     * mappature k/v del generate dal metodo getAMap(). Verifico che se invoco il metodo get passando una chiave non
+     * presente in map, mi ritorna null.
+     * Inoltre controllo che se passo come argomento una chiave null, mi lanci l'eccezione NullPointerException.
+     *<br><br>
+     * <b>Design</b>: verifica la correttezza del valore della mappatura k/v di chiave key ritornato dal metodo.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     * metodo get di Hashtable funzioni.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornera  valore della mappatura k/v di chiave key se quest'ultima è una
+     * chiave presente in una mappatura k/v di map, null se non è presente.
+     */
     @Test
     public void getTest()
     {
         MapAdapter test = getAMap();
 
-        for (int i = 0; i < test.size() / 2; i++)
-            map.put(i, test.get(i));
-        for (int i = 5; i < test.size(); i++)
-            map.put("chiave " + (i - 4), i);
+        map.putAll(test);
 
         for (int i = 0; i < test.size() / 2; i++)
-            assertEquals(test.get(i), map.get(i));
+            assertEquals("stringa " + i, map.get(i));
         for (int i = 5; i < test.size(); i++)
-            assertEquals(test.get(i), map.get("stringa " + (i - 4)));
+            assertEquals(i, map.get("chiave " + (i - 4)));
 
         assertNull(map.get("pippo"));
 
         assertThrows(NullPointerException.class, () -> {map.get(null);});
     }
 
+    /**
+     * Test del metodo     <b>public boolean isEmpty()</b>
+     *<br><br>
+     * <b>Sommario</b>: Controllo che all'inizio la mappa sia effettivamente vuota. Creo un MapAdapter test con il metodo
+     * privato getAMap() e con due for, il primo per le mappature k/v con chiave numerica, il secondo per le mappature
+     * k/v con chiave di tipo string, aggiungo le mappature k/v di test a map una ad una, controllando che ad ogni
+     * ripetizione la mappa non sia più vuota. Alla fine svuoto la mappa e controllo che la dimensione sia zero e
+     * che la mappa torni ad essere vuota.
+     *<br><br>
+     * <b>Design</b>: verificare che la condizione di mappa vuota equivalga alla sua dimensione pari a zero.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     * metodo isEmpty di Hashtable funzioni.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritorna true se la mappa è effettivamente vuota, false se contiene almeno una mappatura k/v.
+     */
     @Test
     public void isEmptyTest()
     {
@@ -138,6 +275,21 @@ public class MapAdapterTester
         assertTrue(map.isEmpty());
     }
 
+    /**
+     * Test del metodo     <b>public HSet keySet()</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo alla mappa map inizialmente vuota tutte le mappature k/v di una MapAdapter
+     * (generata con il metodo privato getAMap()).
+     * Controllo che il metodo keySet() mi ritorni una HSet non null.
+     *<br><br>
+     * <b>Design</b>: verificare la corretta generazione di un HSet delle chiavi di map.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo genera un HSet di tutte le chiavi di map, utilizzabile.
+     */
     @Test
     public void keySetTest()
     {
@@ -145,6 +297,21 @@ public class MapAdapterTester
         assertNotNull(map.keySet());
     }
 
+    /**
+     * Test del metodo     <b>public HSet keySet()</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo alla mappa map inizialmente vuota tutte le mappature k/v di una MapAdapter
+     * (generata con il metodo privato getAMap()).
+     * Controllo che il metodo keySet() mi ritorni una HSet non null.
+     *<br><br>
+     * <b>Design</b>: verificare la corretta generazione di un HSet delle chiavi di map.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo genera un HSet di tutte le chiavi di map, utilizzabile.
+     */
     @Test
     public void putTest()
     {
@@ -178,6 +345,21 @@ public class MapAdapterTester
         assertThrows(NullPointerException.class, () -> {map.put(null, null);});
     }
 
+    /**
+     * Test del metodo     <b>public HSet keySet()</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo alla mappa map inizialmente vuota tutte le mappature k/v di una MapAdapter
+     * (generata con il metodo privato getAMap()).
+     * Controllo che il metodo keySet() mi ritorni una HSet non null.
+     *<br><br>
+     * <b>Design</b>: verificare la corretta generazione di un HSet delle chiavi di map.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo genera un HSet di tutte le chiavi di map, utilizzabile.
+     */
     @Test
     public void putAllTest()
     {
@@ -200,9 +382,37 @@ public class MapAdapterTester
             assertEquals(test2.get(i), map.get("stringa " + (i - 4)));
 
         assertThrows(NullPointerException.class, () -> {map.putAll(null);});
-
     }
 
+    /**
+     * Test del metodo     <b>public Object remove(int index)</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo un MapAdapter test con il metodo privato getAMap() e aggiungo tutte le sue mappature k/v a map.
+     * Istanzio tre nuove variabili; un Object tmp che successivamente conterrà il valore della mappatura k/v da confrontare con
+     * il valore della mappatura k/v ritornato dal metodo remove (remove(i) nel primo for, remove("chiave " + (i - 4))
+     * nel secondo for poiché le chiavi delle mappature k/v sono di due tipi diversi) per verificare che siano effettivamente uguali, un integer count per
+     * tener traccia dell'effettiva riduzione della dimensione della mappa ad ogni invocazione del metodo remove e un
+     * altro integer size per poter iterare l'iperazione di remove un numero di volte pari alla dimensione iniziale della mappa.
+     * Una volta rimossi tutte le mappature k/v da map, riaggiungo tutte le mappature k/v di test ad essa, assegno alla variabile
+     * tmp il valore della mappatura di chiave 2 per poter verificare che il metodo remove ritorni lo stesso valore
+     * invocandolo con chiave pari a 2 e successivamente con chiave pari a 3 per confermare che il valore ritornato sia
+     * diverso dalla variabile tmp. Verifico che se invoco il metodo remove(Object key) con chiave 8 (non presente nella mappa), mi ritorna
+     * null. Verifico che la dimensione della lista sia diminuita di due unità dopo aver invocato
+     * remove due volte. Infine verifico il lancio della eccezione NullPointerException se viene invocato remove con una
+     * chiave null.
+     *<br><br>
+     * <b>Design</b>: verificare la corretta rimozione degli oggetti dalla lista in base all'indice scelto e che ritorni
+     * l'oggetto appena rimosso, la riduzione della dimensione della lista in base al numero di volte che viene invocato
+     * il metodo e che gestisca correttamente l'eccezione.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     * metodo removeElementAt di Vector funzioni.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo rimuove correttamente l'elemento di indice i e lo ritorna, riducendo la dimensione
+     * della lista, a seconda del numero di volte che viene invocato. Gestisce correttamente l'eccezione.
+     */
     @Test
     public void removeTest()
     {
@@ -237,6 +447,25 @@ public class MapAdapterTester
         assertThrows(NullPointerException.class, () -> {map.remove(null);});
     }
 
+    /**
+     * Test del metodo     <b>public int size()</b>
+     *<br><br>
+     * <b>Sommario</b>: Verifico che la dimensione della mappa inizialmente sia zero. Sfrutto un for che aggiunge esattamente
+     * una mappatura k/v a map per iterazione e confronto ogni volta la dimensione della mappa con un contatore che
+     * riproduce il corretto funzionamento dell'incremento della dimensione di una mappa dopo l'aggiunta di una mappatura k/v.
+     * A fine iterazioni confronto per l'ultima volta la dimensione della mappa con la variabile count, svuoto map e
+     * verifico che la dimensione sia tornata a zero.
+     *<br><br>
+     * <b>Design</b>: verificare la corretteza del metodo size controllando la coerenza di esso con un confronto con una
+     * variabile che riproduce lo stesso meccanismo del metodo.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     * metodo size di Hashtable funzioni.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritorna l'effettiva dimensione della mappa.
+     */
     @Test
     public void sizeTest()
     {
@@ -254,6 +483,21 @@ public class MapAdapterTester
         assertEquals(0, map.size());
     }
 
+    /**
+     * Test del metodo     <b>public HCollection values()</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo alla mappa map inizialmente vuota tutte le mappature k/v di una MapAdapter
+     * (generata con il metodo privato getAMap()).
+     * Controllo che il metodo values() mi ritorni una HCollection non null.
+     *<br><br>
+     * <b>Design</b>: verificare la corretta generazione di un HCollection dei valori di map.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo genera un HCollection di tutti i valori di map, utilizzabile.
+     */
     @Test
     public void valuesTest()
     {
@@ -261,6 +505,23 @@ public class MapAdapterTester
         assertNotNull(map.values());
     }
 
+    /**
+     * Test del metodo     <b>public int hashCode()</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo due MapAdapter test1, test2 inizialmente vuoti e aggiungo ad ognuna una mappatura k/v diversa. Aggiungo
+     * a map la stessa mappatura aggiunta a test1 e controllo che l'hashcode di map sia uguale all'hashcode di test1 e
+     * diverso dall'hashcode di test2. Aggiungo una ulteriore mappatura a test1 per renderla diversa da map e controllo
+     * che gli hashcode di map e test1 ora siano effettivamente diversi.
+     *<br><br>
+     * <b>Design</b>: corretto calcolo dell'hashcode in base alle mappature contenute e controllo dell'uguaglianza di esso per
+     * mappe con elementi uguali o diversi.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornera l'hashcode corretto della mappa sottoforma di integer.
+     */
     @Test
     public void hashCodeTest()
     {
@@ -279,6 +540,24 @@ public class MapAdapterTester
         assertNotEquals(test1.hashCode(), map.hashCode());
     }
 
+    /**
+     * Test del metodo     <b>public boolean equals(Object o)</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo una MapAdapter test inizialmente vuoto e aggiungo sia a questa che alla mappa map la mappatura k/v
+     * 1/"test" e controllo che le due mappe siano uguali. Aggiungo un ulteriore elemento alla mappa
+     * test e controllo che ora siano diverse. Controllo che la mappa non sia uguale alla mappa creata con il metodo privato getAMap(),
+     * ad una mappa nulla e ad un oggetto non di tipo MapAdapter.
+     *<br><br>
+     * <b>Design</b>: corretto controllo della uguaglianza fra due mappe anche nei casi limite dove la mappa passata come
+     * argomento sia nulla o non di tipo MapAdapter.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la mappa torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornerà true se l'oggetto passato come argomento sia una mappa uguale a map,
+     * altrimenti false.
+     */
     @Test
     public void equalsTest()
     {
@@ -294,6 +573,7 @@ public class MapAdapterTester
         assertFalse(map.equals(getAVector()));
     }
 
+    // metodi helper
     private MapAdapter getAMap()
     {
         MapAdapter m = new MapAdapter();

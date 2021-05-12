@@ -14,18 +14,31 @@ public class ListAdapterTester
 {
     private ListAdapter list;
 
+    /**
+     * Istanzia una nuova ListAdapter prima di ogni test.
+     * */
     @Before
     public void initialize()
     {
         list = new ListAdapter();
     }
 
+    /**
+     * Se a fine di ogni test list non è vuota, viene svuotata.
+     * */
     @After
     public void clearList()
     {
         if (!list.isEmpty()) list.clear();
     }
 
+    /**
+     * Test delle pre-condizioni di ogni metodo.
+     * <br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
+     * <br><br>
+     * <b>Post-Condizioni</b>: Stampa su terminale i valori di getACollection().
+     * */
     @Test
     public void initializeTest()
     {
@@ -36,26 +49,26 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo public void add(int index, Object element)
-     *
-     * Sommario: Aggiungo alla lista list inizialmente vuota uno ad uno gli elementi con il relativo indice di una listAdapter test ripetutamente in
+     * Test del metodo     <b>public void add(int index, Object element)</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo alla lista list inizialmente vuota uno ad uno gli elementi con il relativo indice di una listAdapter test ripetutamente in
      * un for per la dimensione di test e controllo che alla fine equivalga effettivamente al numero degli elementi
      * aggiunti. Successivamente controllo che gli elementi aagiunti siano stati effettivamente aggiunti a list nella
      * posizione corretta tramite due for che scorrono prima gli elementi di tipo Object e successivamente gli elementi
      * di tipo string. Infine, oltre a verificare che aggiungendo un elemento alla lista in un index già occupato trasli
      * gli elementi di una posizione a destra e che aumenti la dimensione, controllo che aggiungendo elementi con indice
      * non valido o con elemento nullo, lancino le relative eccezioni.
-     *
-     * Design: corretto inserimento degli elementi nella Lista con indice dato. Inserimento di elementi di tipo diverso. Controllo che
+     *<br><br>
+     * <b>Design</b>: corretto inserimento degli elementi nella Lista con indice dato. Inserimento di elementi di tipo diverso. Controllo che
      * gli elementi vengano traslati se aggiunto un elemento con indice già precedentemente occupato. Controllo
      * dell'effettivo lancio delle eccezioni.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo insertElementAt di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: la lista conterrà gli elementi della collection creata tramite il metodo privato getACollection
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: la lista conterrà gli elementi della collection creata tramite il metodo privato getACollection
      * e l'elemento "test" nell'indice 0, con una dimensione pari a 11. Gestirà inoltre correttamente le due eccezioni.
      */
     @Test
@@ -86,23 +99,23 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public boolean add(Object o)
-     *
-     * Sommario: Aggiungo alla lista list inizialmente vuota uno ad uno gli elementi di una list test ripetutamente in
+     * Test del metodo     <b>public boolean add(Object o)</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo alla lista list inizialmente vuota uno ad uno gli elementi di una list test ripetutamente in
      * un for per la dimensione di test e controllo che alla fine equivalga effettivamente al numero degli elementi
      * aggiunti. Successivamente controllo che gli elementi aggiunti siano stati effettivamente aggiunti a list nella
      * posizione corretta e che siano contenuti in essa tramite due for che scorrono prima gli elementi di tipo Object e successivamente gli elementi
      * di tipo string. Infine controllo che aggiungendo elementi nulli, lanci la corretta eccezione.
-     *
-     * Design: corretto inserimento degli elementi nella Lista uno di seguito all'altro. Inserimento di elementi di tipo diverso.
+     *<br><br>
+     * <b>Design</b>: corretto inserimento degli elementi nella Lista uno di seguito all'altro. Inserimento di elementi di tipo diverso.
      * Controllo dell'effettiva gestione della eccezione.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo addElement di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: la lista conterrà gli elementi della collection creata tramite il metodo privato getACollection
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: la lista conterrà gli elementi della collection creata tramite il metodo privato getACollection
      * con una dimensione pari a 10. Gestirà inoltre correttamente l'eccezione. Il metodo ritornerà true se l'oggetto
      * verrà correttamente aggiunto, altrimento false.
      */
@@ -130,23 +143,23 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public boolean addAll(HCollection c)
-     *
-     * Sommario: Aggiungo alla lista list inizialmente vuota tutti gli elementi della collection creata con il metodo
+     * Test del metodo     <b>public boolean addAll(HCollection c)</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo alla lista list inizialmente vuota tutti gli elementi della collection creata con il metodo
      * privato getACollection(). Successivamente controllo che gli elementi aggiunti siano stati effettivamente aggiunti a list nella
      * posizione corretta tramite due for che scorrono prima gli elementi di tipo Object e successivamente gli elementi
      * di tipo string. Controllo che chiamando il metodo addAll non invalidi il funzionamento di altri metodi come add
      * e infine controllo che aggiungendo elementi di una collection nulla, lanci la corretta eccezione.
-     *
-     * Design: corretto inserimento di tutti gli elementi di una collection nella Lista. Inserimento di elementi di
+     *<br><br>
+     * <b>Design</b>: corretto inserimento di tutti gli elementi di una collection nella Lista. Inserimento di elementi di
      * tipo diverso. Controllo dell'effettiva gestione della eccezione.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo addElement di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: la lista conterrà tutti gli elementi della collection creata tramite il metodo privato getACollection
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: la lista conterrà tutti gli elementi della collection creata tramite il metodo privato getACollection
      * e l'elemento "pippo" con una dimensione pari a 11. Gestirà inoltre correttamente l'eccezione. Il metodo ritornerà true se la collection
      * verrà correttamente aggiunta, altrimento false.
      */
@@ -169,23 +182,23 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public boolean addAll(int index, HCollection c)
-     *
-     * Sommario: Aggiungo alla lista list inizialmente vuota tutti gli elementi della collection all'indice zero creata con il metodo
+     * Test del metodo     <b>public boolean addAll(int index, HCollection c)</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo alla lista list inizialmente vuota tutti gli elementi della collection all'indice zero creata con il metodo
      * privato getACollection() e una seconda all'indice 5. Successivamente controllo che gli elementi aggiunti siano stati effettivamente aggiunti a list nella
      * posizione corretta tramite due for che scorrono prima gli elementi di tipo Object e successivamente altri due for
      * per gli elementi di tipo string. Controllo che aggiungendo elementi di una collection nulla o con indice non
      * valido, lanci le corrette eccezioni.
-     *
-     * Design: corretto inserimento di tutti gli elementi di una collection dall'indice scelto nella Lista.
+     *<br><br>
+     * <b>Design</b>: corretto inserimento di tutti gli elementi di una collection dall'indice scelto nella Lista.
      * Inserimento di elementi di tipo diverso. Controllo dell'effettiva gestione della eccezione.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo insertElementAt di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: la lista conterrà nei primi 10 indici i primi 5 elementi Object delle due collection create tramite
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: la lista conterrà nei primi 10 indici i primi 5 elementi Object delle due collection create tramite
      * il metodo privato getACollection e negli altri 10 indici gli altri 5 elementi String delle due collection,
      * con una dimensione pari a 20. Gestirà inoltre correttamente le eccezioni. Il metodo ritornerà true se le collection
      * verranno correttamente aggiunte, altrimento false.
@@ -215,21 +228,21 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public void clear()
-     *
-     * Sommario: Controllo che la dimensione della lista sia effettivamente 0 all'inizio del test. Aggiungo alla lista
+     * Test del metodo     <b>public void clear()</b>
+     *<br><br>
+     * <b>Sommario</b>: Controllo che la dimensione della lista sia effettivamente 0 all'inizio del test. Aggiungo alla lista
      * un collection di dimensione 10 e controllo che la dimensione sia effettivamente del numero degli elementi
      * aggiunti, ossia 10. Successivamente chiamo il metodo clear e controllo che la dimensione sia pari a zero e che
      * quindi la lista sia stata correttamente svuotata.
-     *
-     * Design: corretto svuotamento della Lista con degli elementi.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Design</b>: corretto svuotamento della Lista con degli elementi.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo removeAllElements di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: il metodo svuoterà correttamente la lista da qualsiasi elemento contenuto all'interno portando
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: il metodo svuoterà correttamente la lista da qualsiasi elemento contenuto all'interno portando
      * la dimensione di essa a zero.
      */
     @Test
@@ -243,22 +256,22 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public boolean contains(Object o)
-     *
-     * Sommario: Aggiungo alla lista list inizialmente vuota uno ad uno gli elementi di una list test ripetutamente in
+     * Test del metodo     <b>public boolean contains(Object o)</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo alla lista list inizialmente vuota uno ad uno gli elementi di una list test ripetutamente in
      * un for per la dimensione di test e controllo che alla fine la dimensione equivalga effettivamente al numero degli elementi
      * aggiunti. Successivamente controllo che gli elementi aggiunti siano effettivamente contenuti in essa tramite due for che scorrono prima gli elementi di tipo Object e successivamente gli elementi
      * di tipo string. Controllo che ritorni false se gli passo come argomento un oggetto non presente nella lista.
      * Infine controllo che chiamando il metodo con argomento nullo, lanci la corretta eccezione.
-     *
-     * Design: corretto controllo della presenza di un oggetto nella lista. Controllo della corretta gestione delle eccezioni.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Design</b>: corretto controllo della presenza di un oggetto nella lista. Controllo della corretta gestione delle eccezioni.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo contains di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritornerà true se l'oggetto passato come argomento se è contenuto nella lista,
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornerà true se l'oggetto passato come argomento se è contenuto nella lista,
      * altrimento false.
      */
     @Test
@@ -283,25 +296,25 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public boolean containsAll(HCollection c)
-     *
-     * Sommario: Creo una listAdapter test con il metodo privato getACollection(). Controllo che containsAll ritorni false
+     * Test del metodo     <b>public boolean containsAll(HCollection c)</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo una listAdapter test con il metodo privato getACollection(). Controllo che containsAll ritorni false
      * se gli passo come argomento una collection vuota. Aggiungo a list tutti gli elementi di test e controllo che la
      * sua dimensione sia effettivamente del numero degli elementi aggiunti e controllo che il metodo containsAll ritorni
      * true se gli passo la collection test come argomento. Inoltre controllo la sua validità controllando uno ad uno la
      * presenza degli elementi di test su list. Controllo che aggiungendo altri valori alla lista, il funzionamento del
      * metodo non venga compromesso. Alla fine controllo che chiamando il metodo con una collection nulla o con un oggetto
      * non di tipo HCollection, mi lanci le eccezioni correttamente.
-     *
-     * Design: corretto controllo della presenza di tutti gli oggetti nella lista e che il funzionamento del metodo sia
+     *<br><br>
+     * <b>Design</b>: corretto controllo della presenza di tutti gli oggetti nella lista e che il funzionamento del metodo sia
      * un effettivo contains() e non un equals(). Controllo della corretta gestione delle eccezioni.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo contains di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritornerà true se tutti gli elementi della collection sono contenuti nella lista,
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornerà true se tutti gli elementi della collection sono contenuti nella lista,
      * altrimento false.
      */
     @Test
@@ -328,22 +341,22 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public boolean equals(Object o)
-     *
-     * Sommario: Creo una listAdapter test inizialmente vuoto e aggiungo sia a questo che alla lista list l'elemento
+     * Test del metodo     <b>public boolean equals(Object o)</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo una listAdapter test inizialmente vuoto e aggiungo sia a questo che alla lista list l'elemento
      * "1" e controllo che le due liste siano uguali. Aggiungo un ulteriore elemento alla lista
      * test e controllo ora che siano diverse. Controllo che la lista non sia uguale alla lista creata con il metodo privato getACollection(),
      * ad una lista nulla e ad un oggetto non di tipo ListAdapter.
-     *
-     * Design: corretto controllo della uguaglianza fra due liste anche nei casi limite dove la lista passata come
+     *<br><br>
+     * <b>Design</b>: corretto controllo della uguaglianza fra due liste anche nei casi limite dove la lista passata come
      * argomento sia nulla o non di tipo listAdapter.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritornerà true se l'oggetto passato come argomento sia una lista uguale a list,
-     * altrimento false.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornerà true se l'oggetto passato come argomento sia una lista uguale a list,
+     * altrimenti false.
      */
     @Test
     public void equalsTest()
@@ -361,21 +374,21 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public int hashCode()
-     *
-     * Sommario: Creo due listAdapter test1, test2 inizialmente vuoti e aggiungo ad ognuna un elemento diverso. Aggiungo
+     * Test del metodo     <b>public int hashCode()</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo due listAdapter test1, test2 inizialmente vuoti e aggiungo ad ognuna un elemento diverso. Aggiungo
      * a list lo stesso elemento aggiunto a test1 e controllo che l'hashcode di list sia uguale all'hashcode di test1 e
      * diverso dall'hashcode di test2. Aggiungo un ulteriore elemento a test1 per renderla diversa da list e controllo
      * che gli hashcode di list e test1 ora siano effettivamente diversi.
-     *
-     * Design: corretto calcolo dell'hashcode in base agli elementi contenuti e controllo dell'uguagglianza di esso per
+     *<br><br>
+     * <b>Design</b>: corretto calcolo dell'hashcode in base agli elementi contenuti e controllo dell'uguagglianza di esso per
      * liste con elementi uguali o diversi.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritornera l'hashcode corretto della lista sottoforma di integer.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornera l'hashcode corretto della lista sottoforma di integer.
      */
     @Test
     public void hashCodeTest()
@@ -396,21 +409,21 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public Object get(int index)
-     *
-     * Sommario: Creo un ListAdapter test con il metodo privato getACollection() e lo uso per riempire list. Con due for,
+     * Test del metodo     <b>public Object get(int index)</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo un ListAdapter test con il metodo privato getACollection() e lo uso per riempire list. Con due for,
      * uno per tipo di oggetto di list, controllo che il metodo get ritorni l'elemento effettivamente contenuto nella
      * lista all'indice i. Inoltre controllo che se passo come argomento un indice non valido, mi lanci l'eccezione
      * corretta.
-     *
-     * Design: verifica la correttezza dell'oggetto ritornato dal metodo.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Design</b>: verifica la correttezza dell'oggetto ritornato dal metodo.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo elementAt di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritornera l'oggetto nella posizione index se quest'ultima è una posizione valida.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornera l'oggetto nella posizione index se quest'ultima è una posizione valida.
      */
     @Test
     public void getTest()
@@ -427,24 +440,24 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public int indexOf(Object o)
-     *
-     * Sommario: Creo un ListAdapter test con il metodo privato getACollection() e lo uso per riempire list. Con due for,
+     * Test del metodo     <b>public int indexOf(Object o)</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo un ListAdapter test con il metodo privato getACollection() e lo uso per riempire list. Con due for,
      * uno per tipo di oggetto di list, controllo che il metodo indexOf ritorni l'inidce del primo elemento effettivamente
      * contenuto nella lista all'indice i. Controllo che se passo come argomento un oggetto non contenuto nella lista,
      * mi ritorni l'indice -1. Controllo che se chiamo il metodo indexOf mi ritorni effettivamente l'indice del primo
      * oggetto contenuto nella lista aggiungendo l'oggetto 1 presente all'indice 1, anche in posizione finale.
      * Inoltre controllo che se passo come argomento un oggetto non valido, mi lanci l'eccezione
      * corretta.
-     *
-     * Design: verifica la correttezza dell'indice ritornato dal metodo.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Design</b>: verifica la correttezza dell'indice ritornato dal metodo.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo indexOf di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritornera l'indice del primo oggetto (passato come argomento) presente in questa lista
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornera l'indice del primo oggetto (passato come argomento) presente in questa lista
      * se quest ultimo è effettivamente contenuto, altrimenti -1.
      */
     @Test
@@ -468,21 +481,21 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public boolean isEmpty()
-     *
-     * Sommario: Controllo che all'inizio la lista sia effettivamente vuota. Creo un ListAdapter test con il metodo
+     * Test del metodo     <b>public boolean isEmpty()</b>
+     *<br><br>
+     * <b>Sommario</b>: Controllo che all'inizio la lista sia effettivamente vuota. Creo un ListAdapter test con il metodo
      * privato getACollection() e con un for aggiungo gli elementi di test a list uno ad uno, controllando che ad ogni
      * ripetizione la lista ora non sia più vuota. Alla fine svuoto la lista e controllo che la dimensione sia zero e
      * che la lista torni ad essere vuota.
-     *
-     * Design: verificare che la condizione di lista vuota equivalga alla sua dimensione pari a zero.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Design</b>: verificare che la condizione di lista vuota equivalga alla sua dimensione pari a zero.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo isEmpty di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritorna true se la lista è effettivamente vuota, false se contiene almeno un elemento.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritorna true se la lista è effettivamente vuota, false se contiene almeno un elemento.
      */
     @Test
     public void isEmptyTest()
@@ -501,9 +514,9 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public HIterator iterator()
-     *
-     * Sommario: Creo un iteratore di list e controllo che non sia nullo. Aggiungo dentro a list gli elementi di un
+     * Test del metodo     <b>public HIterator iterator()</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo un iteratore di list e controllo che non sia nullo. Aggiungo dentro a list gli elementi di un
      * ListAdapter creato con il metodo privato getACollection() e creo un nuovo iteratore test di list. Controllo con
      * un for che tutti gli elementi di list siano uguali agli elementi che scorre l'iteratore test tramite il metodo
      * next(). Creo un secondo iteratore test1 per controllare con un while che il metodo hasNext() funzioni e si
@@ -512,15 +525,15 @@ public class ListAdapterTester
      * diminuita e che l'ultimo oggetto della lista non sia più contenuto in essa. Infine verifico che se viene invocato
      * il metodo next() di un iteratore arrivato a fine lista o se invoco il metodo remove ripetutamente, vengono lanciate
      * le relative eccezioni.
-     *
-     * Design: verificare il corretto funzionamento del metodo testando ogni metodo dell'iteratore, controllando
+     *<br><br>
+     * <b>Design</b>: verificare il corretto funzionamento del metodo testando ogni metodo dell'iteratore, controllando
      * che esso agisca effettivamente sulla lista su cui è stato creato e che gestisca correttamente  le eccezioni.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritorna un nuovo iteratore ad ogni chiamata che permette di scorrere corretamente
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritorna un nuovo iteratore ad ogni chiamata che permette di scorrere corretamente
      * la lista e di rimuovere l'ultimo oggetto analizzato da esso. Gestisce correttamente le eccezioni.
      */
     @Test
@@ -551,24 +564,24 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public int lastIndexOf(Object o)
-     *
-     * Sommario: Creo un ListAdapter test con il metodo privato getACollection() e lo uso per riempire list. Con due for,
+     * Test del metodo     <b>public int lastIndexOf(Object o)</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo un ListAdapter test con il metodo privato getACollection() e lo uso per riempire list. Con due for,
      * uno per tipo di oggetto di list, controllo che il metodo lastIndexOf ritorni l'inidce dell'ultimo elemento effettivamente
      * contenuto nella lista all'indice i. Controllo che se passo come argomento un oggetto non contenuto nella lista,
      * mi ritorni l'indice -1. Controllo che se chiamo il metodo lastIndexOf mi ritorni effettivamente l'indice dell'ultimo
      * oggetto contenuto nella lista aggiungendo l'oggetto 1 presente all'indice 1, anche in posizione finale.
      * Inoltre controllo che se passo come argomento un oggetto non valido, mi lanci l'eccezione
      * corretta.
-     *
-     * Design: verifica la correttezza dell'indice ritornato dal metodo.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Design</b>: verifica la correttezza dell'indice ritornato dal metodo.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo indexOf di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritornera l'indice dell'ultimo oggetto (passato come argomento) presente in questa lista
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornera l'indice dell'ultimo oggetto (passato come argomento) presente in questa lista
      * se questo è effettivamente contenuto, altrimenti -1.
      */
     @Test
@@ -592,9 +605,9 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public HListIterator listIterator()
-     *
-     * Sommario: Creo un listIterator di list e controllo che non sia nullo. Aggiungo dentro a list gli elementi di un
+     * Test del metodo     <b>public HListIterator listIterator()</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo un listIterator di list e controllo che non sia nullo. Aggiungo dentro a list gli elementi di un
      * ListAdapter creato con il metodo privato getACollection() e creo un nuovo listIterator test di list. Controllo con
      * un for che tutti gli elementi di list siano uguali agli elementi che scorre il listIterator test tramite il metodo
      * next(). Creo un secondo listIterator test1 per controllare con un while che il metodo hasNext() funzioni e si
@@ -603,15 +616,15 @@ public class ListAdapterTester
      * diminuita e che l'ultimo oggetto della lista non sia più contenuto in essa. Infine verifico che se viene invocato
      * il metodo next() di un listIterator arrivato a fine lista o se invoco il metodo remove ripetutamente, vengono lanciate
      * le relative eccezioni. DA FINIRE
-     *
-     * Design: verificare il corretto funzionamento del metodo testando ogni metodo dell'iteratore, controllando
+     *<br><br>
+     * <b>Design</b>: verificare il corretto funzionamento del metodo testando ogni metodo dell'iteratore, controllando
      * che esso agisca effettivamente sulla lista su cui è stato creato e che gestisca correttamente  le eccezioni.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritorna un nuovo iteratore ad ogni chiamata che permette di scorrere corretamente
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritorna un nuovo iteratore ad ogni chiamata che permette di scorrere corretamente
      * la lista e di rimuovere l'ultimo oggetto analizzato da esso. Gestisce correttamente le eccezioni.
      */
     @Test
@@ -658,9 +671,9 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public Object remove(int index)
-     *
-     * Sommario: Creo un ListAdapter test con il metodo privato getACollection() e aggiungo tutti i suoi elementi a list.
+     * Test del metodo     <b>public Object remove(int index)</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo un ListAdapter test con il metodo privato getACollection() e aggiungo tutti i suoi elementi a list.
      * Istanzio tre nuove variabili; un Object tmp che successivamente conterrà l'oggetto da confrontare con
      * l'oggetto ritornato dal metodo remove(0) per verificare che siano effettivamente uguali, un integer count per
      * tener traccia dell'effettiva riduzione della dimensione della lista ad ogni invocazione del metodo remove e un
@@ -671,17 +684,17 @@ public class ListAdapterTester
      * diverso dalla variabile tmp. Verifico che la dimensione della lista sia diminuita di due unità dopo aver invocato
      * remove due volte. Infine verifico il lancio della eccezioni corretta se viene invocato remove con un indice non
      * valido.
-     *
-     * Design: verificare la corretta rimozione degli oggetti dalla lista in base all'indice scelto e che ritorni
+     *<br><br>
+     * <b>Design</b>: verificare la corretta rimozione degli oggetti dalla lista in base all'indice scelto e che ritorni
      * l'oggetto appena rimosso, la riduzione della dimensione della lista in base al numero di volte che viene invocato
      * il metodo e che gestisca correttamente l'eccezione.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo removeElementAt di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo rimuove correttamente l'elemento di indice i e lo ritorna, riducendo la dimensione
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo rimuove correttamente l'elemento di indice i e lo ritorna, riducendo la dimensione
      * della lista, a seconda del numero di volte che viene invocato. Gestisce correttamente l'eccezione.
      */
     @Test
@@ -711,9 +724,9 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public boolean remove(Object o)
-     *
-     * Sommario: Creo un ListAdapter test con il metodo privato getACollection() e aggiungo tutti i suoi elementi a list.
+     * Test del metodo     <b>public boolean remove(Object o)</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo un ListAdapter test con il metodo privato getACollection() e aggiungo tutti i suoi elementi a list.
      * Istanzio due nuove variabili; un integer count per tener traccia dell'effettiva riduzione della dimensione della
      * lista ad ogni invocazione del metodo remove e un altro integer size per poter iterare l'iperazione di remove un
      * numero di volte pari alla dimensione iniziale della lista. Itero queste azioni con un for per i primi 5 oggetti della lista e
@@ -722,17 +735,17 @@ public class ListAdapterTester
      * nella lista e che invece ritorni false per un oggetto non presente in essa. Verifico che la dimensione della
      * lista sia diminuita di una unità dopo aver invocato remove una volta. Infine verifico il lancio della eccezioni
      * NullPointerException se viene invocato remove con un oggetto null.
-     *
-     * Design: verificare la corretta rimozione degli oggetti dalla lista in base all'oggetto passato, la riduzione
+     *<br><br>
+     * <b>Design</b>: verificare la corretta rimozione degli oggetti dalla lista in base all'oggetto passato, la riduzione
      * della dimensione della lista in base al numero di volte che viene invocato il metodo e che gestisca correttamente
      * l'eccezione.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo removeElement di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritorna true se l'oggetto passato è presente nella lista riducendone la dimensione,
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritorna true se l'oggetto passato è presente nella lista riducendone la dimensione,
      * altrimenti ritorna false. Gestisce correttamente l'eccezione.
      */
     @Test
@@ -771,9 +784,9 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public boolean removeAll(HCollection c)
-     *
-     * Sommario: Creo un ListAdapter test con il metodo privato getACollection(), aggiungo tutti i suoi elementi a list
+     * Test del metodo     <b>public boolean removeAll(HCollection c)</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo un ListAdapter test con il metodo privato getACollection(), aggiungo tutti i suoi elementi a list
      * due volte e controllo che la dimensione di list sia effettivamente 20. Verifico che rimuovendo tutti gli elementi
      * della collection test da list, il metodo ritorni true e che la dimensione di quest'ultima sia 10. Rimuovo tutti
      * gli elementi dalla lista e aggiungo ad essa l'oggetto "pippo" 10 volte. Verifico che il metodo ritorni false se
@@ -781,16 +794,16 @@ public class ListAdapterTester
      * della lista sia rimasta sempre a 10. Infine verifico il lancio della eccezione NullPointerException se viene
      * invocato remove con un oggetto null e della eccezione ClassCastException se viene invocato con un oggetto non di
      * tipo HCollection.
-     *
-     * Design: verificare la corretta rimozione di tutti gli elementi nella collection dalla lista, la riduzione
+     *<br><br>
+     * <b>Design</b>: verificare la corretta rimozione di tutti gli elementi nella collection dalla lista, la riduzione
      * della dimensione della lista in base al numero di oggetti rimossi, che ritorni true solo se vengono effettuate
      * rimozioni e che gestisca correttamente le eccezioni.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritorna true se vengono effettuate delle rimozioni dalla lista di oggetti presenti
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritorna true se vengono effettuate delle rimozioni dalla lista di oggetti presenti
      * sia nella collection che nella lista riducendone la dimensione in base al numero di oggetti rimossi,
      * altrimenti ritorna false se non vengono effettuate rimozioni. Gestisce correttamente le eccezioni.
      */
@@ -816,9 +829,9 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public boolean retainAll(HCollection c)
-     *
-     * Sommario: Creo un ListAdapter test con il metodo privato getACollection(), aggiungo tutti i suoi elementi a list
+     * Test del metodo     <b>public boolean retainAll(HCollection c)</b>
+     *<br><br>
+     * <b>Sommario</b>: Creo un ListAdapter test con il metodo privato getACollection(), aggiungo tutti i suoi elementi a list
      * e controllo che la dimensione di list sia effettivamente 10. Verifico che trattenendo tutti gli elementi
      * della collection test da list, il metodo ritorni false e che la dimensione di quest'ultima sia ancora 10 poiché
      * entrambe contengono gli stessi elementi.
@@ -830,17 +843,17 @@ public class ListAdapterTester
      * metodo poiché il metodo ha rimosso le cinque stringhe presenti in list. Infine verifico il lancio della eccezione
      * NullPointerException se viene invocato retainAll con una collection null e della eccezione ClassCastException se
      * viene invocato con un oggetto non di tipo HCollection.
-     *
-     * Design: verificare il corretto mantenimento di tutti gli elementi nella collection dalla lista, e quindi la
+     *<br><br>
+     * <b>Design</b>: verificare il corretto mantenimento di tutti gli elementi nella collection dalla lista, e quindi la
      * rimozione da questa degli elementi non presenti nella collection, la riduzione della dimensione della lista in
      * base al numero di oggetti rimossi, che ritorni true solo se vengono effettuate rimozioni e che gestisca
      * correttamente le eccezioni.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritorna true se vengono effettuate delle rimozioni dalla lista di oggetti non presenti
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritorna true se vengono effettuate delle rimozioni dalla lista di oggetti non presenti
      * nella collection riducendone la dimensione in base al numero di oggetti rimossi, altrimenti ritorna false se
      * non vengono effettuate rimozioni. Gestisce correttamente le eccezioni.
      */
@@ -868,25 +881,25 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public Object set(int index, Object element)
-     *
-     * Sommario: Aggiungo a list gli elementi di una lista creata con getACollection(). Istanzio due nuove variabili;
+     * Test del metodo     <b>public Object set(int index, Object element)</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo a list gli elementi di una lista creata con getACollection(). Istanzio due nuove variabili;
      * un Object tmp che successivamente conterrà l'oggetto da confrontare con l'oggetto ritornato dal metodo set per
      * verificare che siano effettivamente uguali e un integer size per poter verificare che la dimenzione di list non
      * varia. Dentro il for imposto, con il metodo da testare, l'elemento i*i in posizione i e verifico che, oltre appunto
      * a ritornare l'elemento precedentemente contenuto in quell'indice, che il valore i*i sia stato impostato
      * correttamente. Infine verifico il lancio della eccezione NullPointerException se viene invocato il set di un
      * elemento nullo e della eccezione IndexOutOfBoundsException se viene invocato set con un indice non valido.
-     *
-     * Design: verificare la corretta impostazione dell'elemento passato nella posizione desiderata, che ritorni, se
+     *<br><br>
+     * <b>Design</b>: verificare la corretta impostazione dell'elemento passato nella posizione desiderata, che ritorni, se
      * presente, l'elemento precedemente contenuto nell'indice e che gestisca correttamente le eccezioni.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo setElementAt di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo imposta l'elemento nella posizione scelta correttamente, ritornando l'elemento
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo imposta l'elemento nella posizione scelta correttamente, ritornando l'elemento
      * precedentemente contenuto in quella posizione se presente. Gestisce correttamente le eccezioni.
      */
     @Test
@@ -910,23 +923,23 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public int size()
-     *
-     * Sommario: Verifico che la dimensione della lista inizialmente sia zero. Sfrutto un for che aggiunge esattamente
+     * Test del metodo     <b>public int size()</b>
+     *<br><br>
+     * <b>Sommario</b>: Verifico che la dimensione della lista inizialmente sia zero. Sfrutto un for che aggiunge esattamente
      * un elemento a list per iterazione e confronto ogni volta la dimensione della lista con un contatore che
      * riproduce il corretto funzionamento dell'incremento della dimensione di una lista dopo l'aggiunta di un elemento.
      * A fine iterazioni confronto per l'ultima volta la dimensione della lista con la variabile count, svuoto list e
      * verifico che la dimensione sia tornata a zero.
-     *
-     * Design: verificare la corretteza del metodo size controllando la coerenza di esso con un confronto con una
+     *<br><br>
+     * <b>Design</b>: verificare la corretteza del metodo size controllando la coerenza di esso con un confronto con una
      * variabile che riproduce lo stesso meccanismo del metodo.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo size di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo ritorna l'effettiva dimensione della lista.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritorna l'effettiva dimensione della lista.
      */
     @Test
     public void sizeTest()
@@ -946,19 +959,19 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public HList subList(int fromIndex, int toIndex)
-     *
-     * Sommario: Aggiungo a list due volte gli elementi della lista generata dal metodo privato getACollection().
+     * Test del metodo     <b>public HList subList(int fromIndex, int toIndex)</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo a list due volte gli elementi della lista generata dal metodo privato getACollection().
      * Controllo che il metodo subList mi ritorni una sublist non null. Infine verifico il lancio della eccezione
      * IndexOutOfBoundsException se viene invocato subList con degli indici non validi.
-     *
-     * Design: verificare la corretta generazione di una subList e che gestisca correttamente le eccezioni.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: Il metodo genera una subList utilizzabile. Gestisce correttamente le eccezioni.
+     *<br><br>
+     * <b>Design</b>: verificare la corretta generazione di una subList e che gestisca correttamente le eccezioni.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: Il metodo genera una subList utilizzabile. Gestisce correttamente le eccezioni.
      */
     @Test
     public void subListTest()
@@ -974,21 +987,21 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public Object[] toArray()
-     *
-     * Sommario: Aggiungo a list gli elementi di una lista creata con getACollection(). Istanzio un nuovo array di
+     * Test del metodo     <b>public Object[] toArray()</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo a list gli elementi di una lista creata con getACollection(). Istanzio un nuovo array di
      * Object della dimesione di list e ci copio all'interno un elemento di list per ogni iterazione del for. Infine
      * verifico che l'array appena creato sia uguale all'array ritornato dal metodo toArray.
-     *
-     * Design: verificare che il metodo ritorni effettivamente un array con tutti gli elementi della lista nell'ordine
+     *<br><br>
+     * <b>Design</b>: verificare che il metodo ritorni effettivamente un array con tutti gli elementi della lista nell'ordine
      * corretto.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero e che il
      * metodo copyInto di Vector funzioni.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: il metodo ritorna correttamente un array con tutti gli elementi della lista.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: il metodo ritorna correttamente un array con tutti gli elementi della lista.
      */
     @Test
     public void toArrayTest()
@@ -1003,9 +1016,9 @@ public class ListAdapterTester
     }
 
     /**
-     * Test del metodo     public Object[] toArray(Object[] a)
-     *
-     * Sommario: Aggiungo a list gli elementi di una lista creata con getACollection(). Istanzio tre nuovo array di
+     * Test del metodo     <b>public Object[] toArray(Object[] a)</b>
+     *<br><br>
+     * <b>Sommario</b>: Aggiungo a list gli elementi di una lista creata con getACollection(). Istanzio tre nuovo array di
      * Object; il primo, test,  della dimesione di list, il secondo, test1, della dimensione di list + 5 e il terzo,
      * test2, della dimensione di list - 5. Nel primo copio all'interno un elemento di list per ogni iterazione del for
      * e verifico che l'array appena creato sia uguale all'array ritornato dal metodo toArray. Passo il secondo array
@@ -1013,16 +1026,17 @@ public class ListAdapterTester
      * elementi di test. Eseguo la stessa cosa con il terzo array, salvandomi però l'array ritornato dal metodo in un
      * nuovo array di Object test2_1 poiché la dimensione di test2 è minore rispetto alla dimensione di list. Infine
      * verifico che venga lanciata l'eccezione NullPointerException se l'array passato come argomento è null.
-     *
-     * Design: verificare che il metodo ritorni effettivamente un array con tutti gli elementi della lista nell'ordine
+     *<br><br>
+     * <b>Design</b>: verificare che il metodo ritorni effettivamente un array con tutti gli elementi della lista nell'ordine
      * corretto se la dimensione di quello passato per argomento è minore rispetto a quella della lista o che sovrascriva
-     * i dati di quello passato per argomento se la sua dimensione è maggiore o uguale a quella della lista.
-     *
-     * Pre-condizioni: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
-     *
-     * Post-Condizioni: la lista torna ad essere vuota e di dimensione zero.
-     *
-     * Risultato Atteso: il metodo ritorna correttamente un array con tutti gli elementi della lista o sovrascrive i
+     * i dati di quello passato per argomento se la sua dimensione è maggiore o uguale a quella della lista. Verificare
+     * la corretta gestione del'eccezione.
+     *<br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
+     *<br><br>
+     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     *<br><br>
+     * <b>Risultato Atteso</b>: il metodo ritorna correttamente un array con tutti gli elementi della lista o sovrascrive i
      * dati di quello passato come argomento in base alla dimensione di quest'ultimo.
      */
     @Test

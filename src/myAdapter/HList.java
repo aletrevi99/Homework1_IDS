@@ -73,7 +73,6 @@ public interface HList extends HCollection
      * @throws IllegalArgumentException      - if some aspect of an element in the
      *                                       specified collection prevents it from
      *                                       being added to this list.
-     * @see add(Object)
      */
     boolean addAll(HCollection c);
 
@@ -148,7 +147,6 @@ public interface HList extends HCollection
      *                              more null elements and this list does not
      *                              support null elements (optional).
      * @throws NullPointerException - if the specified collection is null.
-     * @see contains(Object)
      */
     boolean containsAll(HCollection c);
 
@@ -164,7 +162,6 @@ public interface HList extends HCollection
      * @implSpec equals in interface Collection
      * @param o - the object to be compared for equality with this list.
      * @return true if the specified object is equal to this list.
-     * @see Object.hashCode(), Hashtable
      */
     @Override
     boolean equals(Object o);
@@ -191,7 +188,6 @@ public interface HList extends HCollection
      *
      * @implSpec hashCode in interface Collection
      * @return the hash code value for this list.
-     * @see Object.hashCode(), Object.equals(Object), equals(Object)
      */
     @Override
     int hashCode();
@@ -319,7 +315,6 @@ public interface HList extends HCollection
      *                                       collection does not support null
      *                                       elements (optional).
      * @throws NullPointerException          - if the specified collection is null.
-     * @see remove(Object), contains(Object)
      */
     boolean removeAll(HCollection c);
 
@@ -341,7 +336,6 @@ public interface HList extends HCollection
      *                                       collection does not support null
      *                                       elements (optional).
      * @throws NullPointerException          - if the specified collection is null.
-     * @see remove(Object), contains(Object)
      */
     boolean retainAll(HCollection c);
 
@@ -415,7 +409,6 @@ public interface HList extends HCollection
      * @implSpec toArray in interface Collection
      * @return an array containing all of the elements in this list in proper
      *         sequence.
-     * @see Arrays.asList(Object[])
      */
     Object[] toArray();
 

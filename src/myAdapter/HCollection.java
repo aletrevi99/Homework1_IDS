@@ -55,7 +55,6 @@ public interface HCollection
      * @throws IllegalArgumentException      - some aspect of an element of the
      *                                       specified collection prevents it from
      *                                       being added to this collection.
-     * @see add(Object)
      */
     boolean addAll(HCollection c);
 
@@ -98,7 +97,6 @@ public interface HCollection
      *                              more null elements and this collection does not
      *                              support null elements (optional).
      * @throws NullPointerException - if the specified collection is null.
-     * @see contains(Object)
      */
     boolean containsAll(HCollection c);
 
@@ -124,7 +122,6 @@ public interface HCollection
      *
      * @param o - Object to be compared for equality with this collection.
      * @return true if the specified object is equal to this collection
-     * @see Object.equals(Object), Set.equals(Object), List.equals(Object)
      */
     @Override
     boolean equals(Object o);
@@ -139,7 +136,6 @@ public interface HCollection
      * c1.hashCode()==c2.hashCode().
      *
      * @return the hash code value for this collection
-     * @see Object.hashCode(), Object.equals(Object)
      */
     @Override
     int hashCode();
@@ -199,7 +195,6 @@ public interface HCollection
      *                                       collection does not support null
      *                                       elements (optional).
      * @throws NullPointerException          - if the specified collection is null.
-     * @see remove(Object), contains(Object)
      */
     boolean removeAll(HCollection c);
 
@@ -222,7 +217,6 @@ public interface HCollection
      *                                       collection does not support null
      *                                       elements (optional).
      * @throws NullPointerException          - if the specified collection is null.
-     * @see remove(Object), contains(Object)
      */
     boolean retainAll(HCollection c);
 

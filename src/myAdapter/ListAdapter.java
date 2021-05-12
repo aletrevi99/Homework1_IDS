@@ -136,9 +136,9 @@ public class ListAdapter implements HList
         if (o == null)
             return false;
 
-        HCollection l = null;
-        if (o instanceof HCollection)
-            l = (HCollection) o;
+        ListAdapter l = null;
+        if (o instanceof ListAdapter)
+            l = (ListAdapter) o;
         else
             return false;
 

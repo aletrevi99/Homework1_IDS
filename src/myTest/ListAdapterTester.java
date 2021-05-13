@@ -745,7 +745,8 @@ public class ListAdapterTester
      *<br><br>
      * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
      *<br><br>
-     * <b>Risultato Atteso</b>: Il metodo ritorna true se l'oggetto passato è presente nella lista riducendone la dimensione,
+     * <b>Risultato Atteso</b>: Il metodo ritorna true se l'oggetto passato è presente nella lista rimuovendolo e
+     * riducendone la dimensione del set,
      * altrimenti ritorna false. Gestisce correttamente l'eccezione.
      */
     @Test
@@ -876,8 +877,8 @@ public class ListAdapterTester
 
         assertEquals(size / 2, list.size());
 
-        assertThrows(NullPointerException.class, () -> {list.removeAll(null);});
-        assertThrows(ClassCastException.class, () -> {list.removeAll((HCollection) getAVector());});
+        assertThrows(NullPointerException.class, () -> {list.retainAll(null);});
+        assertThrows(ClassCastException.class, () -> {list.retainAll((HCollection) getAVector());});
     }
 
     /**
@@ -1018,7 +1019,7 @@ public class ListAdapterTester
     /**
      * Test del metodo     <b>public Object[] toArray(Object[] a)</b>
      *<br><br>
-     * <b>Sommario</b>: Aggiungo a list gli elementi di una lista creata con getACollection(). Istanzio tre nuovo array di
+     * <b>Sommario</b>: Aggiungo a list gli elementi di una lista creata con getACollection(). Istanzio tre nuovi array di
      * Object; il primo, test,  della dimesione di list, il secondo, test1, della dimensione di list + 5 e il terzo,
      * test2, della dimensione di list - 5. Nel primo copio all'interno un elemento di list per ogni iterazione del for
      * e verifico che l'array appena creato sia uguale all'array ritornato dal metodo toArray. Passo il secondo array

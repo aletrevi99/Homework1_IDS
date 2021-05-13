@@ -81,7 +81,7 @@ public interface HMap
     // Returns a collection view of the values contained in this map.
     HCollection values();
 
-    public static interface Entry
+    interface Entry
     {
         //     Compares the specified object with this entry for equality.
         boolean equals(Object o);

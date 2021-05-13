@@ -160,7 +160,7 @@ public class MapAdapter implements HMap
         return hash;
     }
 
-    public static class Entry implements HMap.Entry
+    private static class Entry implements HMap.Entry
     {
         private Object key = null;
         private Object value = null;
@@ -290,17 +290,11 @@ public class MapAdapter implements HMap
             if (!(o instanceof Entry))
                 throw new ClassCastException();
 
-            Entry obj = (Entry) o;
-
-            if (obj.getKey() == null || obj.getValue() == null)
+            if (((Entry) o).getKey() == null || ((Entry) o).getValue() == null)
                 throw new NullPointerException();
 
-            if (hashTable.containsKey(obj.getKey()))
-            {
-                Entry tmp = (Entry) hashTable.get(obj.getKey());
-
-                return tmp.getValue().equals(obj.getValue());
-            }
+            if (hashTable.containsKey(((Entry) o).getKey()))
+                return hashTable.get(((Entry) o).getKey()).equals(((Entry) o).getValue());
 
             return false;
         }
@@ -318,7 +312,7 @@ public class MapAdapter implements HMap
                     throw new ClassCastException();
 
             HIterator iterCheck = c.iterator();
-            Entry tmp = null;
+            Entry tmp;
             while (iterCheck.hasNext())
             {
                 tmp = (Entry) iterCheck.next();
@@ -425,7 +419,7 @@ public class MapAdapter implements HMap
                     throw new ClassCastException();
 
             HIterator iterCheck = c.iterator();
-            Entry obj = null;
+            Entry obj;
             while (iterCheck.hasNext())
             {
                 obj = (Entry) iterCheck.next();
@@ -440,7 +434,7 @@ public class MapAdapter implements HMap
             HIterator iter = iterator();
             int size = hashTable.size();
 
-            Entry tmp = null;
+            Entry tmp;
             while (iter.hasNext())
             {
                 tmp = (Entry) iter.next();
@@ -464,9 +458,9 @@ public class MapAdapter implements HMap
 
             HIterator iter = this.iterator();
 
-            int j = 0;
+            int j = this.size();
             while (iter.hasNext())
-                tmp[j++] = iter.next();
+                tmp[--j] = iter.next();
 
             return tmp;
         }
@@ -482,9 +476,9 @@ public class MapAdapter implements HMap
 
             HIterator iter = this.iterator();
 
-            int j = 0;
+            int j = this.size();
             while (iter.hasNext())
-                a[j++] = iter.next();
+                a[--j] = iter.next();
 
             return a;
         }
@@ -513,21 +507,21 @@ public class MapAdapter implements HMap
         public boolean equals(Object o)
         {
             if (o == null)
-                throw new NullPointerException();
+                return false;
 
             if (!(o instanceof EntrySet))
-                throw new ClassCastException();
+                return false;
 
             EntrySet es = (EntrySet) o;
             HIterator iter = es.iterator();
 
-            Entry tmp = null;
+            Entry tmp;
             while (iter.hasNext())
             {
                 tmp = (Entry) iter.next();
 
                 if (tmp.getKey() == null || tmp.getValue() == null)
-                    throw new NullPointerException();
+                    return false;
             }
 
             return this.hashCode() == es.hashCode();
@@ -698,7 +692,7 @@ public class MapAdapter implements HMap
             HIterator iter = iterator();
             int size = hashTable.size();
 
-            Object tmp = null;
+            Object tmp;
             while (iter.hasNext())
             {
                 tmp = iter.next();
@@ -722,9 +716,9 @@ public class MapAdapter implements HMap
 
             HIterator iter = this.iterator();
 
-            int j = 0;
+            int j = this.size();
             while (iter.hasNext())
-                tmp[j++] = iter.next();
+                tmp[--j] = iter.next();
 
             return tmp;
         }
@@ -740,9 +734,9 @@ public class MapAdapter implements HMap
 
             HIterator iter = this.iterator();
 
-            int j = 0;
+            int j = this.size();
             while (iter.hasNext())
-                a[j++] = iter.next();
+                a[--j] = iter.next();
 
             return a;
         }
@@ -753,7 +747,7 @@ public class MapAdapter implements HMap
             HIterator iter = this.iterator();
 
             int hash = 0;
-            Object tmp = null;
+            Object tmp;
 
             while (iter.hasNext())
             {
@@ -771,17 +765,17 @@ public class MapAdapter implements HMap
         public boolean equals(Object o)
         {
             if (o == null)
-                throw new NullPointerException();
+                return false;
 
             if (!(o instanceof KeySet))
-                throw new ClassCastException();
+                return false;
 
             KeySet ks = (KeySet) o;
             HIterator iter = ks.iterator();
 
             while (iter.hasNext())
                 if (iter.next() == null)
-                    throw new NullPointerException();
+                    return false;
 
             return this.hashCode() == ks.hashCode();
         }
@@ -934,7 +928,7 @@ public class MapAdapter implements HMap
             HIterator iter = c.iterator();
             int size = hashTable.size();
 
-            Object tmp = null;
+            Object tmp;
             while (iter.hasNext())
             {
                 tmp = iter.next();
@@ -959,7 +953,7 @@ public class MapAdapter implements HMap
             HIterator iter = iterator();
             int size = hashTable.size();
 
-            Object tmp = null;
+            Object tmp;
             while (iter.hasNext())
             {
                 tmp = iter.next();
@@ -983,9 +977,9 @@ public class MapAdapter implements HMap
 
             HIterator iter = this.iterator();
 
-            int j = 0;
+            int j = this.size();
             while (iter.hasNext())
-                tmp[j++] = iter.next();
+                tmp[--j] = iter.next();
 
             return tmp;
         }
@@ -1001,9 +995,9 @@ public class MapAdapter implements HMap
 
             HIterator iter = this.iterator();
 
-            int j = 0;
+            int j = this.size();
             while (iter.hasNext())
-                a[j++] = iter.next();
+                a[--j] = iter.next();
 
             return a;
         }
@@ -1014,7 +1008,7 @@ public class MapAdapter implements HMap
             HIterator iter = this.iterator();
 
             int hash = 0;
-            Object tmp = null;
+            Object tmp;
 
             while (iter.hasNext())
             {
@@ -1032,17 +1026,17 @@ public class MapAdapter implements HMap
         public boolean equals(Object o)
         {
             if (o == null)
-                throw new NullPointerException();
+                return false;
 
             if (!(o instanceof ValuesCollection))
-                throw new ClassCastException();
+                return false;
 
             ValuesCollection vc = (ValuesCollection) o;
             HIterator iter = vc.iterator();
 
             while (iter.hasNext())
                 if (iter.next() == null)
-                    throw new NullPointerException();
+                    return false;
 
             return this.hashCode() == vc.hashCode();
         }

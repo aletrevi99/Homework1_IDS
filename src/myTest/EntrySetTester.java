@@ -27,12 +27,12 @@ public class EntrySetTester
     }
 
     /**
-     * Se a fine di ogni test map non è vuota, viene svuotata.
+     * Se a fine di ogni test eSet non è vuota, viene svuotata.
      * */
     @After
     public void clear()
     {
-        if (!map.isEmpty()) map.clear();
+        if (!eSet.isEmpty()) eSet.clear();
     }
 
     /**
@@ -57,7 +57,7 @@ public class EntrySetTester
      *<br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HSet correttamente inizializzato con dimensione uguale a 10.
      *<br><br>
-     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     * <b>Post-Condizioni</b>: eSet torna ad essere vuota e di dimensione zero.
      *<br><br>
      * <b>Risultato Atteso</b>: il metodo conferma che non può essere utilizzato.
      */
@@ -76,7 +76,7 @@ public class EntrySetTester
      *<br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HSet correttamente inizializzato con dimensione uguale a 10.
      *<br><br>
-     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     * <b>Post-Condizioni</b>: eSet torna ad essere vuoto e di dimensione zero.
      *<br><br>
      * <b>Risultato Atteso</b>: il metodo conferma che non può essere utilizzato.
      */
@@ -97,7 +97,7 @@ public class EntrySetTester
      *<br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HSet correttamente inizializzato con dimensione uguale a 10.
      *<br><br>
-     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     * <b>Post-Condizioni</b>: eSet torna ad essere vuoto e di dimensione zero.
      *<br><br>
      * <b>Risultato Atteso</b>: il metodo svuoterà correttamente la lista da qualsiasi elemento contenuto all'interno portando
      * la dimensione di essa a zero.
@@ -123,7 +123,7 @@ public class EntrySetTester
      * <b>Pre-condizioni</b>:oggetto di tipo HSet correttamente inizializzato con dimensione uguale a 10 e che il
      * metodo get di Hashtable funzioni.
      *<br><br>
-     * <b>Post-Condizioni</b>: il set torna ad essere vuoto e di dimensione zero.
+     * <b>Post-Condizioni</b>: eSet torna ad essere vuoto e di dimensione zero.
      *<br><br>
      * <b>Risultato Atteso</b>: Il metodo ritornerà true se l'Entry passato come argomento è contenuto nel set,
      * altrimento false. Gestisce correttamente le eccezioni.
@@ -214,13 +214,13 @@ public class EntrySetTester
      * un for che tutti gli Entry di eSet(ottenuti con un toArray()) siano uguali agli Entry che scorre l'iteratore test tramite il metodo
      * next(). Creo un secondo iteratore test1 per controllare con un while che il metodo hasNext() funzioni e si
      * comporti allo stesso modo del for testato precedentemente. Verifico che il metodo remove() dell'iteratore
-     * rimuova effettivamente l'ultimo Entry controllato da test1 controllando che la dimensione della lista sia
+     * rimuova effettivamente l'ultimo Entry controllato da test1 controllando che la dimensione del set sia
      * diminuita. Infine verifico che se viene invocato
-     * il metodo next() di un iteratore arrivato a fine lista o se invoco il metodo remove ripetutamente, vengono lanciate
+     * il metodo next() di un iteratore arrivato a fine set o se invoco il metodo remove ripetutamente, vengono lanciate
      * rispettivamente NoSuchElementException e IllegalStateException.
      *<br><br>
      * <b>Design</b>: verificare il corretto funzionamento del metodo iterator testando ogni metodo dell'iteratore, controllando
-     * che esso agisca effettivamente sulla lista su cui è stato creato e che gestisca correttamente le eccezioni.
+     * che esso agisca effettivamente sul set su cui è stato creato e che gestisca correttamente le eccezioni.
      *<br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HSet correttamente inizializzato con dimensione uguale a 10.
      *<br><br>
@@ -361,7 +361,7 @@ public class EntrySetTester
      * del set test da eSet, il metodo ritorni false e che la dimensione di quest'ultimo sia ancora 10 poiché
      * entrambi contengono gli stessi Entry.
      * Mi salvo in una variabile
-     * la dimensione della lista. Mantengo in eSet tutti gli Entry presenti nel set test3 invocando
+     * la dimensione di eSet. Mantengo in eSet tutti gli Entry presenti nel set test3 invocando
      * il metodo, ossia vengono rimossi da eSet tutti gli Entry non presenti in test3 (in questo esempio tutti gli Entry con chiave
      * di tipo string) e verifico se la rimozione è andata a buon fine col il for iterato per la dimensione di eSet,
      * confrontando gli Entry di test con gli Entry di eSet.
@@ -488,7 +488,7 @@ public class EntrySetTester
      * Passo il secondo array
      * come argomento del metodo toArray e verifico tramite un for che i nuovi Entry di test1 siano uguali agli Entry
      * di test. Eseguo la stessa cosa con il terzo array, salvandomi però l'array ritornato dal metodo in un
-     * nuovo array di Object test2_1 poiché la dimensione di test2 è minore rispetto alla dimensione di list. Infine
+     * nuovo array di Object test2_1 poiché la dimensione di test2 è minore rispetto alla dimensione di eSet. Infine
      * verifico che venga lanciata l'eccezione NullPointerException se l'array passato come argomento è null.
      *<br><br>
      * <b>Design</b>: verificare che il metodo ritorni effettivamente un array con tutti gli Entry del set nell'ordine
@@ -500,7 +500,7 @@ public class EntrySetTester
      *<br><br>
      * <b>Post-Condizioni</b>: eSet torna ad essere vuoto e di dimensione zero.
      *<br><br>
-     * <b>Risultato Atteso</b>: il metodo ritorna correttamente un array con tutti gli elementi del set o sovrascrive i
+     * <b>Risultato Atteso</b>: il metodo ritorna correttamente un array con tutti gli Entry del set o sovrascrive i
      * dati di quello passato come argomento in base alla dimensione di quest'ultimo.
      */
     @Test

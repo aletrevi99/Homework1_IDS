@@ -1,5 +1,46 @@
 package myAdapter;
 
+/**
+ * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the
+ * list each element is inserted. The user can access elements by their integer index (position in the list), and search
+ * for elements in the list.
+ * <p>
+ * Unlike sets, lists typically allow duplicate elements. More formally, lists typically allow pairs of elements e1 and
+ * e2 such that e1.equals(e2), and they typically allow multiple null elements if they allow null elements at all. It
+ * is not inconceivable that someone might wish to implement a list that prohibits duplicates, by throwing runtime
+ * exceptions when the user attempts to insert them, but we expect this usage to be rare.
+ * <p>
+ * The List interface places additional stipulations, beyond those specified in the Collection interface, on the
+ * contracts of the iterator, add, remove, equals, and hashCode methods. Declarations for other inherited methods are
+ * also included here for convenience.
+ * <p>
+ * The List interface provides four methods for positional (indexed) access to list elements. Lists (like Java arrays)
+ * are zero based. Note that these operations may execute in time proportional to the index value for some
+ * implementations (the LinkedList class, for example). Thus, iterating over the elements in a list is typically
+ * preferable to indexing through it if the caller does not know the implementation.
+ * <p>
+ * The List interface provides a special iterator, called a ListIterator, that allows element insertion and replacement,
+ * and bidirectional access in addition to the normal operations that the Iterator interface provides. A method is
+ * provided to obtain a list iterator that starts at a specified position in the list.
+ * <p>
+ * The List interface provides two methods to search for a specified object. From a performance standpoint, these
+ * methods should be used with caution. In many implementations they will perform costly linear searches.
+ * <p>
+ * The List interface provides two methods to efficiently insert and remove multiple elements at an arbitrary point in
+ * the list.
+ * <p>
+ * Note: While it is permissible for lists to contain themselves as elements, extreme caution is advised: the equals
+ * and hashCode methods are no longer well defined on a such a list.
+ * <p>
+ * Some list implementations have restrictions on the elements that they may contain. For example, some implementations
+ * prohibit null elements, and some have restrictions on the types of their elements. Attempting to add an ineligible
+ * element throws an unchecked exception, typically NullPointerException or ClassCastException. Attempting to query the
+ * presence of an ineligible element may throw an exception, or it may simply return false; some implementations will
+ * exhibit the former behavior and some will exhibit the latter. More generally, attempting an operation on an
+ * ineligible element whose completion would not result in the insertion of an ineligible element into the list may
+ * throw an exception or it may succeed, at the option of the implementation. Such exceptions are marked as "optional"
+ * in the specification for this interface.
+ */
 public interface HList extends HCollection
 {
     /**
@@ -33,7 +74,6 @@ public interface HList extends HCollection
      * may be added. List classes should clearly specify in their documentation any
      * restrictions on what elements may be added.
      *
-     * @implSpec add in interface Collection
      * @param o - element to be appended to this list.
      * @return true (as per the general contract of the Collection.add method).
      * @throws UnsupportedOperationException - if the add method is not supported by
@@ -47,6 +87,7 @@ public interface HList extends HCollection
      * @throws IllegalArgumentException      - if some aspect of this element
      *                                       prevents it from being added to this
      *                                       list.
+     * @implSpec add in interface Collection
      */
     boolean add(Object o);
 
@@ -58,7 +99,6 @@ public interface HList extends HCollection
      * (Note that this will occur if the specified collection is this list, and it's
      * nonempty.)
      *
-     * @implSpec addAll in interface Collection
      * @param c - collection whose elements are to be added to this list.
      * @return true if this list changed as a result of the call.
      * @throws UnsupportedOperationException - if the addAll method is not supported
@@ -73,6 +113,7 @@ public interface HList extends HCollection
      * @throws IllegalArgumentException      - if some aspect of an element in the
      *                                       specified collection prevents it from
      *                                       being added to this list.
+     * @implSpec addAll in interface Collection
      */
     boolean addAll(HCollection c);
 
@@ -111,9 +152,9 @@ public interface HList extends HCollection
      * Removes all of the elements from this list (optional operation). This list
      * will be empty after this call returns (unless it throws an exception).
      *
-     * @implSpec clear in interface Collection
      * @throws UnsupportedOperationException - if the clear method is not supported
      *                                       by this list.
+     * @implSpec clear in interface Collection
      */
     void clear();
 
@@ -122,13 +163,13 @@ public interface HList extends HCollection
      * returns true if and only if this list contains at least one element e such
      * that (o==null ? e==null : o.equals(e)).
      *
-     * @implSpec contains in interface Collection
      * @param o - element whose presence in this list is to be tested.
      * @return true if this list contains the specified element.
      * @throws ClassCastException   - if the type of the specified element is
      *                              incompatible with this list (optional).
      * @throws NullPointerException - if the specified element is null and this list
      *                              does not support null elements (optional).
+     * @implSpec contains in interface Collection
      */
     boolean contains(Object o);
 
@@ -136,10 +177,9 @@ public interface HList extends HCollection
      * Returns true if this list contains all of the elements of the specified
      * collection.
      *
-     * @implSpec containsAll in interface Collection
      * @param c - collection to be checked for containment in this list.
      * @return true if this list contains all of the elements of the specified
-     *         collection.
+     * collection.
      * @throws ClassCastException   - if the types of one or more elements in the
      *                              specified collection are incompatible with this
      *                              list (optional).
@@ -147,6 +187,7 @@ public interface HList extends HCollection
      *                              more null elements and this list does not
      *                              support null elements (optional).
      * @throws NullPointerException - if the specified collection is null.
+     * @implSpec containsAll in interface Collection
      */
     boolean containsAll(HCollection c);
 
@@ -159,9 +200,9 @@ public interface HList extends HCollection
      * elements in the same order. This definition ensures that the equals method
      * works properly across different implementations of the List interface.
      *
-     * @implSpec equals in interface Collection
      * @param o - the object to be compared for equality with this list.
      * @return true if the specified object is equal to this list.
+     * @implSpec equals in interface Collection
      */
     @Override
     boolean equals(Object o);
@@ -181,13 +222,13 @@ public interface HList extends HCollection
      * to be the result of the following calculation: hashCode = 1; Iterator i =
      * list.iterator(); while (i.hasNext()) { Object obj = i.next(); hashCode =
      * 31*hashCode + (obj==null ? 0 : obj.hashCode()); }
-     *
+     * <p>
      * This ensures that list1.equals(list2) implies that
      * list1.hashCode()==list2.hashCode() for any two lists, list1 and list2, as
      * required by the general contract of Object.hashCode.
      *
-     * @implSpec hashCode in interface Collection
      * @return the hash code value for this list.
+     * @implSpec hashCode in interface Collection
      */
     @Override
     int hashCode();
@@ -200,7 +241,7 @@ public interface HList extends HCollection
      *
      * @param o - element to search for.
      * @return the index in this list of the first occurrence of the specified
-     *         element, or -1 if this list does not contain this element.
+     * element, or -1 if this list does not contain this element.
      * @throws ClassCastException   - if the type of the specified element is
      *                              incompatible with this list (optional).
      * @throws NullPointerException - if the specified element is null and this list
@@ -211,16 +252,16 @@ public interface HList extends HCollection
     /**
      * Returns true if this list contains no elements.
      *
-     * @implSpec isEmpty in interface Collection
      * @return true if this list contains no elements.
+     * @implSpec isEmpty in interface Collection
      */
     boolean isEmpty();
 
     /**
      * Returns an iterator over the elements in this list in proper sequence.
      *
-     * @implSpec iterator in interface Collection
      * @return an iterator over the elements in this list in proper sequence.
+     * @implSpec iterator in interface Collection
      */
     HIterator iterator();
 
@@ -232,7 +273,7 @@ public interface HList extends HCollection
      *
      * @param o - element to search for.
      * @return the index in this list of the last occurrence of the specified
-     *         element, or -1 if this list does not contain this element.
+     * element, or -1 if this list does not contain this element.
      * @throws ClassCastException   - if the type of the specified element is
      *                              incompatible with this list (optional).
      * @throws NullPointerException - if the specified element is null and this list
@@ -257,7 +298,7 @@ public interface HList extends HCollection
      * @param index - index of first element to be returned from the list iterator
      *              (by a call to the next method).
      * @return a list iterator of the elements in this list (in proper sequence),
-     *         starting at the specified position in this list.
+     * starting at the specified position in this list.
      * @throws IndexOutOfBoundsException - if the index is out of range (index < 0
      *                                   || index > size()).
      */
@@ -283,7 +324,6 @@ public interface HList extends HCollection
      * formally, removes the element with the lowest index i such that (o==null ?
      * get(i)==null : o.equals(get(i))) (if such an element exists).
      *
-     * @implSpec remove in interface Collection
      * @param o - element to be removed from this list, if present.
      * @return true if this list contained the specified element.
      * @throws ClassCastException            - if the type of the specified element
@@ -294,6 +334,7 @@ public interface HList extends HCollection
      *                                       elements (optional).
      * @throws UnsupportedOperationException - if the remove method is not supported
      *                                       by this list.
+     * @implSpec remove in interface Collection
      */
     boolean remove(Object o);
 
@@ -301,7 +342,6 @@ public interface HList extends HCollection
      * Removes from this list all the elements that are contained in the specified
      * collection (optional operation).
      *
-     * @implSpec removeAll in interface Collection
      * @param c - collection that defines which elements will be removed from this
      *          list.
      * @return true if this list changed as a result of the call.
@@ -315,6 +355,7 @@ public interface HList extends HCollection
      *                                       collection does not support null
      *                                       elements (optional).
      * @throws NullPointerException          - if the specified collection is null.
+     * @implSpec removeAll in interface Collection
      */
     boolean removeAll(HCollection c);
 
@@ -323,7 +364,6 @@ public interface HList extends HCollection
      * collection (optional operation). In other words, removes from this list all
      * the elements that are not contained in the specified collection.
      *
-     * @implSpec retainAll in interface Collection
      * @param c - collection that defines which elements this set will retain.
      * @return true if this list changed as a result of the call.
      * @throws UnsupportedOperationException - if the retainAll method is not
@@ -336,6 +376,7 @@ public interface HList extends HCollection
      *                                       collection does not support null
      *                                       elements (optional).
      * @throws NullPointerException          - if the specified collection is null.
+     * @implSpec retainAll in interface Collection
      */
     boolean retainAll(HCollection c);
 
@@ -366,8 +407,8 @@ public interface HList extends HCollection
      * Returns the number of elements in this list. If this list contains more than
      * Integer.MAX_VALUE elements, returns Integer.MAX_VALUE.
      *
-     * @implSpec size in interface Collection
      * @return the number of elements in this list.
+     * @implSpec size in interface Collection
      */
     int size();
 
@@ -382,9 +423,9 @@ public interface HList extends HCollection
      * expects a list can be used as a range operation by passing a subList view
      * instead of a whole list. For example, the following idiom removes a range of
      * elements from a list:
-     *
+     * <p>
      * list.subList(from, to).clear();
-     *
+     * <p>
      * Similar idioms may be constructed for indexOf and lastIndexOf, and all of the
      * algorithms in the Collections class can be applied to a subList. The
      * semantics of the list returned by this method become undefined if the backing
@@ -406,9 +447,9 @@ public interface HList extends HCollection
      * Returns an array containing all of the elements in this list in proper
      * sequence. Obeys the general contract of the Collection.toArray method.
      *
-     * @implSpec toArray in interface Collection
      * @return an array containing all of the elements in this list in proper
-     *         sequence.
+     * sequence.
+     * @implSpec toArray in interface Collection
      */
     Object[] toArray();
 
@@ -417,7 +458,6 @@ public interface HList extends HCollection
      * sequence; the runtime type of the returned array is that of the specified
      * array. Obeys the general contract of the Collection.toArray(Object[]) method.
      *
-     * @implSpec toArray in interface Collection
      * @param a - the array into which the elements of this list are to be stored,
      *          if it is big enough; otherwise, a new array of the same runtime type
      *          is allocated for this purpose.
@@ -426,6 +466,7 @@ public interface HList extends HCollection
      *                              not a supertype of the runtime type of every
      *                              element in this list.
      * @throws NullPointerException - if the specified array is null.
+     * @implSpec toArray in interface Collection
      */
     Object[] toArray(Object[] a);
 }

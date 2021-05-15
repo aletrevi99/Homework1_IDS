@@ -44,8 +44,10 @@ public class ListAdapterTester
     {
         assertEquals(0, list.size());
         Object[] a = getACollection().toArray();
+        System.out.println("Elementi presenti nella lista getACollection()\n--------------------------------------");
         for (int i = 0; i < 10; i++)
-            System.out.println(a[i]);
+            System.out.println(i + ".\t\t\t\t" + a[i]);
+        System.out.println("--------------------------------------\n");
     }
 
     /**
@@ -388,7 +390,7 @@ public class ListAdapterTester
      *<br><br>
      * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
      *<br><br>
-     * <b>Risultato Atteso</b>: Il metodo ritornera l'hashcode corretto della lista sottoforma di integer.
+     * <b>Risultato Atteso</b>: Il metodo ritornera l'hashcode corretto della lista sottoforma di int.
      */
     @Test
     public void hashCodeTest()
@@ -615,7 +617,7 @@ public class ListAdapterTester
      * rimuova effettivamente l'ultimo oggetto controllato da test1 controllando che la dimensione della lista sia
      * diminuita e che l'ultimo oggetto della lista non sia più contenuto in essa. Infine verifico che se viene invocato
      * il metodo next() di un listIterator arrivato a fine lista o se invoco il metodo remove ripetutamente, vengono lanciate
-     * le relative eccezioni. DA FINIRE
+     * le relative eccezioni.
      *<br><br>
      * <b>Design</b>: verificare il corretto funzionamento del metodo testando ogni metodo dell'iteratore, controllando
      * che esso agisca effettivamente sulla lista su cui è stato creato e che gestisca correttamente  le eccezioni.
@@ -746,8 +748,7 @@ public class ListAdapterTester
      * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
      *<br><br>
      * <b>Risultato Atteso</b>: Il metodo ritorna true se l'oggetto passato è presente nella lista rimuovendolo e
-     * riducendone la dimensione del set,
-     * altrimenti ritorna false. Gestisce correttamente l'eccezione.
+     * riducendo la dimensione di list, altrimenti ritorna false. Gestisce correttamente l'eccezione.
      */
     @Test
     public void removeObjectTest()

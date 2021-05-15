@@ -8,7 +8,7 @@ public class TestRunner
 {
     public static void main(String[] args)
     {
-        Result result = JUnitCore.runClasses(ListAdapterTester.class);
+        Result result = JUnitCore.runClasses(ListAdapterSuite.class);
 
         for (Failure failure : result.getFailures())
             System.out.println(failure.toString());
@@ -17,14 +17,14 @@ public class TestRunner
         if (result.wasSuccessful())
             System.out.println("Tutti i test sono stati completati con successo.");
         else
-            System.out.println("Non tutti i test sono risultati corretti.\n");
+            System.out.println(result.getFailureCount() + " test falliti.\n");
 
-        System.out.println("Test eseguiti: 26.");
+        System.out.println("Test eseguiti: " + result.getRunCount());
         System.out.println("========= Fine Test per ListAdapter =========\n\n" +
                 "\tProceeding with the next one.\n");
 
 
-        Result result2 = JUnitCore.runClasses(MapAdapterTester.class);
+        Result result2 = JUnitCore.runClasses(MapAdapterSuite.class);
 
         for (Failure failure : result2.getFailures())
             System.out.println(failure.toString());
@@ -33,61 +33,14 @@ public class TestRunner
         if (result2.wasSuccessful())
             System.out.println("Tutti i test sono stati completati con successo.");
         else
-            System.out.println("Non tutti i test sono risultati corretti.\n");
+            System.out.println(result2.getFailureCount() + " test falliti.\n");
 
-        System.out.println("Test eseguiti: 15.");
-        System.out.println("========= Fine Test per MapAdapter =========\n\n"+
-                "\tProceeding with the next one.\n");
+        System.out.println("Test eseguiti: " + result2.getRunCount());
+        System.out.println("========= Fine Test per MapAdapter =========\n");
 
-
-        Result result3 = JUnitCore.runClasses(EntrySetTester.class);
-
-        for (Failure failure : result3.getFailures())
-            System.out.println(failure.toString());
-
-        System.out.println("======== Inizio Test per EntrySet ========");
-        if (result3.wasSuccessful())
-            System.out.println("Tutti i test sono stati completati con successo.");
-        else
-            System.out.println("Non tutti i test sono risultati corretti.\n");
-
-        System.out.println("Test eseguiti: 16.");
-        System.out.println("========= Fine Test per EntrySet =========\n\n"+
-                "\tProceeding with the next one.\n");
-
-
-        Result result4 = JUnitCore.runClasses(KeySetTester.class);
-
-        for (Failure failure : result3.getFailures())
-            System.out.println(failure.toString());
-
-        System.out.println("======== Inizio Test per keySet ========");
-        if (result4.wasSuccessful())
-            System.out.println("Tutti i test sono stati completati con successo.");
-        else
-            System.out.println("Non tutti i test sono risultati corretti.\n");
-
-        System.out.println("Test eseguiti: 16.");
-        System.out.println("========= Fine Test per keySet =========\n\n"+
-                "\tProceeding with the next one.\n");
-
-
-        Result result5 = JUnitCore.runClasses(ValuesCollectionTester.class);
-
-        for (Failure failure : result5.getFailures())
-            System.out.println(failure.toString());
-
-        System.out.println("======== Inizio Test per ValuesCollection ========");
-        if (result5.wasSuccessful())
-            System.out.println("Tutti i test sono stati completati con successo.");
-        else
-            System.out.println("Non tutti i test sono risultati corretti.\n");
-
-        System.out.println("Test eseguiti: 16.");
-        System.out.println("========= Fine Test per ValuesCollection =========\n\n");
-
-        System.out.println("Totale test eseguiti: xxx. Grand total of tests run: xxx.");
+        System.out.println("Totale test eseguiti: " + (result.getRunCount() + result2.getRunCount()) + ". Di cui "
+                + (result.getRunCount() + result2.getRunCount() - result.getFailureCount() - result2.getFailureCount())
+                + " completati con successo.");
         System.out.println("Versione di JUnit utilizzata : 4.13.1");
-
     }
 }

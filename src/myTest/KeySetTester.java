@@ -211,23 +211,24 @@ public class KeySetTester
 
     /**
      * Test del metodo     <b>public HIterator iterator()</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Creo un iteratore test di kSet e controllo che non sia nullo. Controllo con
-     * un for che tutte le chiavi di kSet(ottenuti con un toArray()) siano uguali alle chiavi che scorre l'iteratore test tramite il metodo
+     * un for che tutte le chiavi di kSet(ottenute con un toArray(). Lo scorro al contrario poiché l'iteratore naviga nel set in ordine
+     * inverso (per definizione di Enumeration)) siano uguali alle chiavi che scorre l'iteratore test tramite il metodo
      * next(). Creo un secondo iteratore test1 per controllare con un while che il metodo hasNext() funzioni e si
      * comporti allo stesso modo del for testato precedentemente. Verifico che il metodo remove() dell'iteratore
-     * rimuova effettivamente l'ultima chiave controllato da test1 controllando che la dimensione del set sia
+     * rimuova effettivamente l'ultima chiave ispezionata da test1 controllando che la dimensione del set sia
      * diminuita. Infine verifico che se viene invocato
      * il metodo next() di un iteratore arrivato a fine set o se invoco il metodo remove ripetutamente, vengono lanciate
      * rispettivamente NoSuchElementException e IllegalStateException.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: verificare il corretto funzionamento del metodo iterator testando ogni metodo dell'iteratore, controllando
      * che esso agisca effettivamente sul set su cui è stato creato e che gestisca correttamente le eccezioni.
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HSet correttamente inizializzato con dimensione uguale a 10.
-     *<br><br>
-     * <b>Post-Condizioni</b>: kSet torna ad essere vuota e di dimensione zero.
-     *<br><br>
+     * <br><br>
+     * <b>Post-Condizioni</b>: kSet torna ad essere vuoto e di dimensione zero.
+     * <br><br>
      * <b>Risultato Atteso</b>: Il metodo ritorna un nuovo iteratore ad ogni chiamata, che permette di scorrere corretamente
      * il set e di rimuovere l'ultima chiave analizzata da esso. Gestisce correttamente le eccezioni.
      */
@@ -541,26 +542,27 @@ public class KeySetTester
 
     /**
      * Test del metodo     <b>public int hashCode()</b>
-     *<br><br>
-     * <b>Sommario</b>: Creo due listAdapter test1, test2 inizialmente vuoti e aggiungo ad ognuna un elemento diverso. Aggiungo
-     * a list lo stesso elemento aggiunto a test1 e controllo che l'hashcode di list sia uguale all'hashcode di test1 e
-     * diverso dall'hashcode di test2. Aggiungo un ulteriore elemento a test1 per renderla diversa da list e controllo
-     * che gli hashcode di list e test1 ora siano effettivamente diversi.
-     *<br><br>
-     * <b>Design</b>: corretto calcolo dell'hashcode in base agli elementi contenuti e controllo dell'uguagglianza di esso per
-     * liste con elementi uguali o diversi.
-     *<br><br>
-     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
-     *<br><br>
-     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
-     *<br><br>
-     * <b>Risultato Atteso</b>: Il metodo ritornera l'hashcode corretto della lista sottoforma di integer.
+     * <br><br>
+     * <b>Sommario</b>: Svuoto map, ci aggiungo una mappatura k/v e rigenero kSet. Creo due mapAdapter test1, test2
+     * inizialmente vuote, aggiungo ad ognuna una mappatura k/v diversa (quella di test1 è uguale a quella di map)
+     * e genero i relativi keySet in testSet1 e testSet2. Controllo che l'hashcode di kSet sia uguale all'hashcode di testSet1 e
+     * diverso dall'hashcode di testSet2.
+     * <br><br>
+     * <b>Design</b>: corretto calcolo dell'hashcode in base agli elementi contenuti e controllo dell'uguaglianza di esso per
+     * set con elementi uguali o diversi.
+     * <br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo HSet correttamente inizializzato con dimensione uguale a 0.
+     * <br><br>
+     * <b>Post-Condizioni</b>: kSet torna ad essere vuoto e di dimensione zero.
+     * <br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornera l'hashcode corretto del set sottoforma di integer.
      */
     @Test
     public void hashCodeTest()
     {
         map.clear();
         map.put(1, "pippo");
+        kSet = map.keySet();
 
         MapAdapter test1 = new MapAdapter();
         test1.put(1, "pippo");
@@ -576,20 +578,21 @@ public class KeySetTester
 
     /**
      * Test del metodo     <b>public boolean equals(Object o)</b>
-     *<br><br>
-     * <b>Sommario</b>: Creo una listAdapter test inizialmente vuoto e aggiungo sia a questo che alla lista list l'elemento
-     * "1" e controllo che le due liste siano uguali. Aggiungo un ulteriore elemento alla lista
-     * test e controllo ora che siano diverse. Controllo che la lista non sia uguale alla lista creata con il metodo privato getACollection(),
-     * ad una lista nulla e ad un oggetto non di tipo ListAdapter.
-     *<br><br>
-     * <b>Design</b>: corretto controllo della uguaglianza fra due liste anche nei casi limite dove la lista passata come
-     * argomento sia nulla o non di tipo listAdapter.
-     *<br><br>
-     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
-     *<br><br>
-     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
-     *<br><br>
-     * <b>Risultato Atteso</b>: Il metodo ritornerà true se l'oggetto passato come argomento sia una lista uguale a list,
+     * <br><br>
+     * <b>Sommario</b>: Svuoto map, ci aggiungo una mappatura k/v e rigenero kSet. Creo due mapAdapter test1, test2
+     * inizialmente vuote, aggiungo ad ognuna una mappatura k/v diversa (quella di test1 è uguale a quella di map)
+     * e genero i relativi keySet() in testSet1 e testSet2. Verifico che il metodo equals() dia esito positivo se confronto
+     * kSet con testSet1 (poiché uguali) e che dia esito negativo se confronto kSet con testSet2 (poiché diversi).
+     * Controllo che ritorni false se invoco il metodo con una lista nulla e un oggetto non di tipo KeySet.
+     * <br><br>
+     * <b>Design</b>: corretto controllo della uguaglianza fra due KeySet anche nei casi limite dove la lista passata come
+     * argomento sia nulla o non di tipo KeySet.
+     * <br><br>
+     * <b>Pre-condizioni</b>: oggetto di tipo HSet correttamente inizializzato con dimensione uguale a zero.
+     * <br><br>
+     * <b>Post-Condizioni</b>: kSet torna ad essere vuota e di dimensione zero.
+     * <br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritornerà true se l'oggetto passato come argomento sia un KeySet uguale a kSet,
      * altrimenti false.
      */
     @Test

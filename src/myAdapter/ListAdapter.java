@@ -524,15 +524,8 @@ public class ListAdapter implements HList
 
     private class SubList extends ListAdapter
     {
-
-        /**
-         * Variable to indicate the lower bound (inclusive) of the vector to operate with.
-         */
         private final int from;
 
-        /**
-         * Variable to indicate the upper bound (exclusive) of the vector to operate with.
-         */
         private int to;
 
         /**

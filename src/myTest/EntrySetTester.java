@@ -64,9 +64,7 @@ public class EntrySetTester
     @Test
     public void addTest()
     {
-        assertThrows(UnsupportedOperationException.class, () -> {
-            eSet.add("test");
-        });
+        assertThrows(UnsupportedOperationException.class, () -> eSet.add("test"));
     }
 
     /**
@@ -85,9 +83,7 @@ public class EntrySetTester
     @Test
     public void addAllTest()
     {
-        assertThrows(UnsupportedOperationException.class, () -> {
-            eSet.addAll(getACollection());
-        });
+        assertThrows(UnsupportedOperationException.class, () -> eSet.addAll(getACollection()));
     }
 
     /**
@@ -130,7 +126,7 @@ public class EntrySetTester
      * <b>Post-Condizioni</b>: eSet torna ad essere vuoto e di dimensione zero.
      * <br><br>
      * <b>Risultato Atteso</b>: Il metodo ritornerà true se l'Entry passato come argomento è contenuto nel set,
-     * altrimento false. Gestisce correttamente le eccezioni.
+     * altrimenti false. Gestisce correttamente le eccezioni.
      */
     @Test
     public void containsTest()
@@ -138,12 +134,8 @@ public class EntrySetTester
         for (int i = 0; i < eSet.size(); i++)
             assertTrue(eSet.contains(eSet.toArray()[i]));
 
-        assertThrows(NullPointerException.class, () -> {
-            eSet.contains(null);
-        });
-        assertThrows(ClassCastException.class, () -> {
-            eSet.contains("pippo");
-        });
+        assertThrows(NullPointerException.class, () -> eSet.contains(null));
+        assertThrows(ClassCastException.class, () -> eSet.contains("pippo"));
     }
 
     /**
@@ -163,7 +155,7 @@ public class EntrySetTester
      * <b>Post-Condizioni</b>: il set torna ad essere vuoto e di dimensione zero.
      * <br><br>
      * <b>Risultato Atteso</b>: Il metodo ritornerà true se tutti gli Entry della collection sono contenuti nel set,
-     * altrimento false.
+     * altrimenti false.
      */
     @Test
     public void containsAllTest()
@@ -179,12 +171,8 @@ public class EntrySetTester
         for (int i = 0; i < eSet.size(); i++)
             assertTrue(eSet.contains(test.toArray()[i]));
 
-        assertThrows(NullPointerException.class, () -> {
-            eSet.containsAll(null);
-        });
-        assertThrows(ClassCastException.class, () -> {
-            eSet.containsAll((HCollection) getAVector());
-        });
+        assertThrows(NullPointerException.class, () -> eSet.containsAll(null));
+        assertThrows(ClassCastException.class, () -> eSet.containsAll((HCollection) getAVector()));
     }
 
     /**
@@ -239,7 +227,7 @@ public class EntrySetTester
      * <br><br>
      * <b>Post-Condizioni</b>: eSet torna ad essere vuota e di dimensione zero.
      * <br><br>
-     * <b>Risultato Atteso</b>: Il metodo ritorna un nuovo iteratore ad ogni chiamata, che permette di scorrere corretamente
+     * <b>Risultato Atteso</b>: Il metodo ritorna un nuovo iteratore ad ogni chiamata, che permette di scorrere correttamente
      * il set e di rimuovere l'ultimo Entry analizzato da esso. Gestisce correttamente le eccezioni.
      */
     @Test
@@ -264,12 +252,8 @@ public class EntrySetTester
         test1.remove();
         assertEquals(size - 1, eSet.size());
 
-        assertThrows(NoSuchElementException.class, () -> {
-            test1.next();
-        });
-        assertThrows(IllegalStateException.class, () -> {
-            test1.remove();
-        });
+        assertThrows(NoSuchElementException.class, () -> test1.next());
+        assertThrows(IllegalStateException.class, () -> test1.remove());
     }
 
     /**
@@ -319,9 +303,7 @@ public class EntrySetTester
         assertFalse(eSet.remove(testSet.toArray()[0]));
         assertEquals(1, eSet.size());
 
-        assertThrows(NullPointerException.class, () -> {
-            eSet.remove(null);
-        });
+        assertThrows(NullPointerException.class, () -> eSet.remove(null));
     }
 
     /**
@@ -368,12 +350,8 @@ public class EntrySetTester
         assertFalse(eSet.removeAll(test2));
         assertEquals(10, eSet.size());
 
-        assertThrows(NullPointerException.class, () -> {
-            eSet.removeAll(null);
-        });
-        assertThrows(ClassCastException.class, () -> {
-            eSet.removeAll((HCollection) getAVector());
-        });
+        assertThrows(NullPointerException.class, () -> eSet.removeAll(null));
+        assertThrows(ClassCastException.class, () -> eSet.removeAll((HCollection) getAVector()));
     }
 
     /**
@@ -424,12 +402,8 @@ public class EntrySetTester
 
         assertEquals(size / 2, eSet.size());
 
-        assertThrows(NullPointerException.class, () -> {
-            eSet.retainAll(null);
-        });
-        assertThrows(ClassCastException.class, () -> {
-            eSet.retainAll((HCollection) getAVector());
-        });
+        assertThrows(NullPointerException.class, () -> eSet.retainAll(null));
+        assertThrows(ClassCastException.class, () -> eSet.retainAll((HCollection) getAVector()));
     }
 
     /**
@@ -440,7 +414,7 @@ public class EntrySetTester
      * dimensione di eSet (ossia 10). Rimuovo un Entry con il remove dell'iteratore e verifico che la dimensione di eSet
      * sia diminuita di una unità. Infine svuoto eSet e controllo che la sua dimensione sia tornata a 0.
      * <br><br>
-     * <b>Design</b>: verificare la corretteza del metodo size controllando la coerenza di esso con un confronto con una
+     * <b>Design</b>: verificare la correttezza del metodo size controllando la coerenza di esso con un confronto con una
      * variabile che riproduce lo stesso meccanismo del metodo.
      * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HSet correttamente inizializzato con dimensione uguale a 10 e che il
@@ -473,7 +447,7 @@ public class EntrySetTester
     /**
      * Test del metodo     <b>public Object[] toArray()</b>
      * <br><br>
-     * <b>Sommario</b>: Istanzio un nuovo array test di Object della dimesione di eSet e ci copio all'interno un Entry per
+     * <b>Sommario</b>: Istanzio un nuovo array test di Object della dimensione di eSet e ci copio all'interno un Entry per
      * ogni iterazione di un for che scorre gli indici al contrario, poiché l'iteratore naviga nel set in ordine
      * inverso (per definizione di Enumeration). Verifico che tutti gli Entry di test siano presenti in eSet tramite un for.
      * Infine verifico che test sia uguale all'array ritornato dal metodo toArray.
@@ -507,7 +481,7 @@ public class EntrySetTester
      * Test del metodo     <b>public Object[] toArray()</b>
      * <br><br>
      * <b>Sommario</b>: Istanzio tre nuovi array di
-     * Object; il primo, test,  della dimesione di eSet, il secondo, test1, della dimensione di (eSet + 5) e il terzo,
+     * Object; il primo, test,  della dimensione di eSet, il secondo, test1, della dimensione di (eSet + 5) e il terzo,
      * test2, della dimensione di (eSet - 5). Dentro test copio tutti gli entry di eSet, uno per
      * ogni iterazione di un for che scorre gli indici al contrario, poiché l'iteratore naviga nel set in ordine
      * inverso (per definizione di Enumeration). Verifico che tutti gli Entry di test siano presenti in eSet tramite un for.
@@ -555,9 +529,7 @@ public class EntrySetTester
         for (int i = eSet.size() - 1; i >= 0; i--)
             assertEquals(test[i], test2_1[i]);
 
-        assertThrows(NullPointerException.class, () -> {
-            eSet.toArray(null);
-        });
+        assertThrows(NullPointerException.class, () -> eSet.toArray(null));
     }
 
     /**
@@ -575,7 +547,7 @@ public class EntrySetTester
      * <br><br>
      * <b>Post-Condizioni</b>: eSet torna ad essere vuoto e di dimensione zero.
      * <br><br>
-     * <b>Risultato Atteso</b>: Il metodo ritornera l'hashcode corretto del set sottoforma di integer.
+     * <b>Risultato Atteso</b>: Il metodo ritornerà l'hashcode corretto del set sotto forma di integer.
      */
     @Test
     public void hashCodeTest()

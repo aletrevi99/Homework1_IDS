@@ -341,7 +341,7 @@ public class SubListAdapterTester
      * <br><br>
      * <b>Post-Condizioni</b>: sublist torna ad essere vuota e di dimensione zero. List invece torna di dimensione 4.
      * <br><br>
-     * <b>Risultato Atteso</b>: Il metodo ritorna l'hashcode corretto della sublist sottoforma di int
+     * <b>Risultato Atteso</b>: Il metodo ritorna l'hashcode corretto della sublist sotto forma di int
      */
     @Test
     public void hashCodeTest()
@@ -408,7 +408,7 @@ public class SubListAdapterTester
      * Test del metodo     <b>public int indexOf(Object o)</b>
      * <br><br>
      * <b>Sommario</b>: Con due for,
-     * uno per tipo di oggetto di sublist, controllo che il metodo indexOf ritorni l'inidce del primo elemento effettivamente
+     * uno per tipo di oggetto di sublist, controllo che il metodo indexOf ritorni l'indice del primo elemento effettivamente
      * contenuto nella sublist all'indice i. Controllo che se passo come argomento un oggetto non contenuto nella sublist,
      * mi ritorni l'indice -1. Controllo che se chiamo il metodo indexOf mi ritorni effettivamente l'indice del primo
      * oggetto contenuto nella sublist aggiungendo l'oggetto 2 presente all'indice 0, anche in posizione finale.
@@ -474,58 +474,59 @@ public class SubListAdapterTester
     /**
      * Test del metodo     <b>public HIterator iterator()</b>
      * <br><br>
-     * <b>Sommario</b>: Creo un iteratore di list e controllo che non sia nullo. Aggiungo dentro a list gli elementi di un
-     * ListAdapter creato con il metodo privato getACollection() e creo un nuovo iteratore test di list. Controllo con
-     * un for che tutti gli elementi di list siano uguali agli elementi che scorre l'iteratore test tramite il metodo
+     * <b>Sommario</b>: Svuoto sublist. Creo un iteratore di sublist e controllo che non sia nullo. Aggiungo dentro a sublist gli elementi di un
+     * ListAdapter creato con il metodo privato getACollection() e creo un nuovo iteratore test di sublist. Controllo con
+     * un for che tutti gli elementi di sublist siano uguali agli elementi che scorre l'iteratore test tramite il metodo
      * next(). Creo un secondo iteratore test1 per controllare con un while che il metodo hasNext() funzioni e si
      * comporti allo stesso modo del for testato precedentemente. Verifico che il metodo remove dell'iteratore
-     * rimuova effettivamente l'ultimo oggetto controllato da test1 controllando che la dimensione della lista sia
-     * diminuita e che l'ultimo oggetto della lista non sia più contenuto in essa. Infine verifico che se viene invocato
-     * il metodo next() di un iteratore arrivato a fine lista o se invoco il metodo remove ripetutamente, vengono lanciate
-     * le relative eccezioni.
+     * rimuova effettivamente l'ultimo oggetto controllato da test1 controllando che la dimensione della sublist sia
+     * diminuita e che l'ultimo oggetto della sublist non sia più contenuto in essa. Infine verifico che se viene invocato
+     * il metodo next() di un iteratore arrivato a fine sublist o se invoco il metodo remove ripetutamente, vengono lanciate
+     * vengono lanciate rispettivamente NoSuchElementException e IllegalStateException.
      * <br><br>
      * <b>Design</b>: verificare il corretto funzionamento del metodo testando ogni metodo dell'iteratore, controllando
-     * che esso agisca effettivamente sulla lista su cui è stato creato e che gestisca correttamente  le eccezioni.
+     * che esso agisca effettivamente sulla sublist su cui è stato creato e che gestisca correttamente  le eccezioni.
      * <br><br>
-     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
+     * <b>Pre-condizioni</b>: sublist di list correttamente inizializzata da indice 2 a indice 8 con dimensione uguale a 6.
      * <br><br>
-     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     * <b>Post-Condizioni</b>: sublist torna ad essere vuota e di dimensione zero. List invece torna di dimensione 4.
      * <br><br>
      * <b>Risultato Atteso</b>: Il metodo ritorna un nuovo iteratore ad ogni chiamata che permette di scorrere correttamente
-     * la lista e di rimuovere l'ultimo oggetto analizzato da esso. Gestisce correttamente le eccezioni.
+     * la sublist e di rimuovere l'ultimo oggetto analizzato da esso. Gestisce correttamente le eccezioni.
      */
     @Test
     public void iteratorTest()
     {
+        sublist.clear();
         HIterator testNull = sublist.iterator();
         assertNotNull(testNull);
 
-        list.addAll(getACollection());
-        HIterator test = list.iterator();
+        sublist.addAll(getACollection());
+        HIterator test = sublist.iterator();
 
-        for (int i = 0; i < list.size(); i++)
-            assertSame(test.next(), list.get(i));
+        for (int i = 0; i < sublist.size(); i++)
+            assertSame(test.next(), sublist.get(i));
 
-        HIterator test1 = list.iterator();
+        HIterator test1 = sublist.iterator();
         int j = 0;
         while (test1.hasNext())
-            assertSame(test1.next(), list.get(j++));
+            assertSame(test1.next(), sublist.get(j++));
 
-        assertEquals(j, list.size());
-        int size = list.size();
+        assertEquals(j, sublist.size());
+        int size = sublist.size();
         test1.remove();
-        assertEquals(size - 1, list.size());
-        //assertFalse(list.contains("stringa 5"));
+        assertEquals(size - 1, sublist.size());
+        assertFalse(sublist.contains("stringa 5"));
 
-        assertThrows(NoSuchElementException.class, () -> test1.next());
-        assertThrows(IllegalStateException.class, () -> test1.remove());
+        assertThrows(NoSuchElementException.class, test1::next);
+        assertThrows(IllegalStateException.class, test1::remove);
     }
 
     /**
      * Test del metodo     <b>public int indexOf(Object o)</b>
      * <br><br>
      * <b>Sommario</b>: Con due for,
-     * uno per tipo di oggetto di sublist, controllo che il metodo lastIndexOf ritorni l'inidce dell'ultimo elemento effettivamente
+     * uno per tipo di oggetto di sublist, controllo che il metodo lastIndexOf ritorni l'indice dell'ultimo elemento effettivamente
      * contenuto nella sublist all'indice i. Controllo che se passo come argomento un oggetto non contenuto nella sublist,
      * mi ritorni l'indice -1. Controllo che se chiamo il metodo lastIndexOf mi ritorni effettivamente l'indice dell'ultimo
      * oggetto contenuto nella sublist aggiungendo l'oggetto 2 presente all'indice 0, anche in posizione finale.
@@ -559,67 +560,117 @@ public class SubListAdapterTester
     /**
      * Test del metodo     <b>public HListIterator listIterator()</b>
      * <br><br>
-     * <b>Sommario</b>: Creo un listIterator di list e controllo che non sia nullo. Aggiungo dentro a list gli elementi di un
-     * ListAdapter creato con il metodo privato getACollection() e creo un nuovo listIterator test di list. Controllo con
-     * un for che tutti gli elementi di list siano uguali agli elementi che scorre il listIterator test tramite il metodo
+     * <b>Sommario</b>: Svuoto la sublist.
+     * Creo un listIterator di sublist e controllo che non sia nullo. Aggiungo dentro a sublist gli elementi di un
+     * ListAdapter creato con il metodo privato getACollection() e creo un nuovo listIterator test di sublist. Controllo con
+     * un for che tutti gli elementi di sublist siano uguali agli elementi che scorre il listIterator test tramite il metodo
      * next(). Creo un secondo listIterator test1 per controllare con un while che il metodo hasNext() funzioni e si
      * comporti allo stesso modo del for testato precedentemente. Verifico che il metodo remove del listIterator
-     * rimuova effettivamente l'ultimo oggetto controllato da test1 controllando che la dimensione della lista sia
-     * diminuita e che l'ultimo oggetto della lista non sia più contenuto in essa. Infine verifico che se viene invocato
-     * il metodo next() di un listIterator arrivato a fine lista o se invoco il metodo remove ripetutamente, vengono lanciate
-     * le relative eccezioni. DA FINIRE
+     * rimuova effettivamente l'ultimo oggetto controllato da test1 controllando che la dimensione della sublist sia
+     * diminuita e che l'ultimo oggetto della sublist non sia più contenuto in essa. Verifico che se viene invocato
+     * il metodo next() di un listIterator arrivato a fine sublist o se invoco il metodo remove ripetutamente, vengono lanciate rispettivamente
+     * NoSuchElementException e IllegalStateException. Aggiungo l'oggetto "pippo" per testare il metodo add() e verifico che la dimensione sia aumentata di uno
+     * e che la stringa "pippo" sia stata effettivamente aggiunta controllando pure il funzionamento del metodo previous().
+     * Controllo che se chiamo add() con un oggetto null mi lancia NullPointerException. Verifico che i metodi nextIndex() e
+     * previousIndex() ritornino rispettivamente l'indice che andrà ad ispezionare col metodo next() e l'indice appena ispezionato.
+     * Infine verifico il funzionamento del metodo set() con una stringa "test" e che lanci rispettivamente NullPointerException
+     * se lo invoco con un oggetto null e IllegalStateException se lo invoco successivamente ad un remove().
      * <br><br>
-     * <b>Design</b>: verificare il corretto funzionamento del metodo testando ogni metodo dell'iteratore, controllando
-     * che esso agisca effettivamente sulla lista su cui è stato creato e che gestisca correttamente  le eccezioni.
+     * <b>Design</b>: verificare il corretto funzionamento del metodo testando ogni metodo di HListIterator, controllando
+     * che esso agisca effettivamente sulla sublist su cui è stato creato e che gestisca correttamente le eccezioni.
      * <br><br>
-     * <b>Pre-condizioni</b>: oggetto di tipo ListAdapter correttamente inizializzato con dimensione uguale a zero.
+     * <b>Pre-condizioni</b>: sublist di list correttamente inizializzata da indice 2 a indice 8 con dimensione uguale a 6.
      * <br><br>
-     * <b>Post-Condizioni</b>: la lista torna ad essere vuota e di dimensione zero.
+     * <b>Post-Condizioni</b>: sublist torna ad essere vuota e di dimensione zero. List invece torna di dimensione 4.
      * <br><br>
-     * <b>Risultato Atteso</b>: Il metodo ritorna un nuovo iteratore ad ogni chiamata che permette di scorrere correttamente
-     * la lista e di rimuovere l'ultimo oggetto analizzato da esso. Gestisce correttamente le eccezioni.
+     * <b>Risultato Atteso</b>: Il metodo ritorna un nuovo listIterator ad ogni chiamata che permette di scorrere correttamente
+     * la sublist in entrambi i sensi e di agire su di essa. Gestisce correttamente le eccezioni.
      */
     @Test
     public void listIteratorTest()
     {
-        HListIterator testNull = list.listIterator();
+        sublist.clear();
+        HListIterator testNull = sublist.listIterator();
         assertNotNull(testNull);
 
-        list.addAll(getACollection());
-        HListIterator test = list.listIterator();
+        sublist.addAll(getACollection());
+        HListIterator test = sublist.listIterator();
 
-        for (int i = 0; i < list.size(); i++)
-            assertEquals(test.next(), list.get(i));
+        for (int i = 0; i < sublist.size(); i++)
+            assertEquals(test.next(), sublist.get(i));
 
-        HListIterator test1 = list.listIterator();
+        HListIterator test1 = sublist.listIterator();
+
+        assertFalse(test1.hasPrevious());
+        assertThrows(NoSuchElementException.class, test1::previous);
+
         int j = 0;
         while (test1.hasNext())
-            assertEquals(test1.next(), list.get(j++));
-
-        assertEquals(j, list.size());
-        int size = list.size();
+        {
+            assertEquals(test1.next(), sublist.get(j++));
+            assertTrue(test1.hasPrevious());
+        }
+        assertEquals(j, sublist.size());
+        int size = sublist.size();
         test1.remove();
-        assertEquals(size - 1, list.size());
-        //assertFalse(list.contains("stringa 5"));
+        assertEquals(size - 1, sublist.size());
+        assertFalse(sublist.contains("stringa 5"));
 
         assertThrows(NoSuchElementException.class, test1::next);
         assertThrows(IllegalStateException.class, test1::remove);
+
+        test1.add("pippo");
+        assertEquals(size, sublist.size());
+
+        assertThrows(NullPointerException.class, () -> test1.add(null));
+
+        assertEquals(sublist.size(), test1.nextIndex());
+        assertEquals(sublist.size() - 1, test1.previousIndex());
+
+        assertEquals("pippo", test1.previous());
+
+        test1.set("test");
+        assertEquals("test", test1.next());
+        assertThrows(NullPointerException.class, () -> test1.set(null));
+
+        test1.remove();
+        assertThrows(IllegalStateException.class, () -> test1.set("test"));
     }
 
+    /**
+     * Test del metodo     <b>public HListIterator listIterator(int index)</b>
+     * <br><br>
+     * <b>Sommario</b>: Svuoto sublist. Creo un listIterator di sublist e controllo che non sia nullo. Aggiungo dentro a sublist gli elementi di un
+     * ListAdapter creato con il metodo privato getACollection() e creo un nuovo listIterator test di sublist dall'indice 5.
+     * Scorro test con un while per verificare che gli oggetti ispezionati da test siano effettivamenti quelli della sublist
+     * a partire dall'indice 5. Infine verifico che se invoco il metodo con un indice non valido mi lanci IndexOutOfBoundException.
+     * <br><br>
+     * <b>Design</b>: verificare il corretto funzionamento del listIterator, controllando
+     * che esso agisca effettivamente sulla sublist su cui è stato creato dall'indice scelto e che gestisca correttamente l'eccezione.
+     * <br><br>
+     * <b>Pre-condizioni</b>: sublist di list correttamente inizializzata da indice 2 a indice 8 con dimensione uguale a 6.
+     * <br><br>
+     * <b>Post-Condizioni</b>: sublist torna ad essere vuota e di dimensione zero. List invece torna di dimensione 4.
+     * <br><br>
+     * <b>Risultato Atteso</b>: Il metodo ritorna un nuovo listIterator di sublist, a partire dall'indice scelto,
+     * ad ogni chiamata che permette di scorrere correttamente
+     * la sublist in entrambi i sensi e di agire su di essa. Gestisce correttamente le eccezioni.
+     */
     @Test
     public void listIteratorIndexTest()
     {
-        HListIterator testNull = list.listIterator();
+        sublist.clear();
+        HListIterator testNull = sublist.listIterator();
         assertNotNull(testNull);
 
-        list.addAll(getACollection());
-        HListIterator test = list.listIterator(5);
+        sublist.addAll(getACollection());
+        HListIterator test = sublist.listIterator(5);
 
         int j = 0;
         while (test.hasNext())
-            assertEquals(test.next(), list.get(j++ + 5));
+            assertEquals(test.next(), sublist.get(j++ + 5));
 
-        assertThrows(IndexOutOfBoundsException.class, () -> list.listIterator(999));
+        assertThrows(IndexOutOfBoundsException.class, () -> sublist.listIterator(999));
     }
 
     /**

@@ -10,6 +10,7 @@ import org.junit.runners.Suite;
         KeySetTester.class,
         ValuesCollectionTester.class
 })
-public class MapAdapterSuite {
+public class MapAdapterSuite
+{
 
 }

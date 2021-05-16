@@ -74,8 +74,8 @@ public interface HSet extends HCollection
      * true if and only if this set contains an element e such that (o==null ? e==null : o.equals(e)).
      *
      * @param o - element whose presence in this set is to be tested.
-     * @throws NullPointerException - if the specified element is null and this set does not support null elements (optional).
      * @return true if this set contains the specified element.
+     * @throws NullPointerException - if the specified element is null and this set does not support null elements (optional).
      */
 
     boolean contains(Object o);

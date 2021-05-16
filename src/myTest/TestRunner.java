@@ -21,7 +21,7 @@ public class TestRunner
 
         System.out.println("Test eseguiti: " + result.getRunCount());
         System.out.println("========= Fine Test per ListAdapter =========\n\n" +
-                "\tProceeding with the next one.\n");
+                "\tProcedo con la prossima Suite.\n");
 
 
         Result result2 = JUnitCore.runClasses(MapAdapterSuite.class);
@@ -41,6 +41,6 @@ public class TestRunner
         System.out.println("Totale test eseguiti: " + (result.getRunCount() + result2.getRunCount()) + ". Di cui "
                 + (result.getRunCount() + result2.getRunCount() - result.getFailureCount() - result2.getFailureCount())
                 + " completati con successo.");
-        System.out.println("Versione di JUnit utilizzata : 4.13.1");
+        System.out.println("Versione di JUnit utilizzata: 4.13.1");
     }
 }

@@ -17,7 +17,7 @@ public class ValuesCollectionTester
 
     /**
      * Istanzia un nuovo ValuesCollection pieno prima di ogni test.
-     * */
+     */
     @Before
     public void initialize()
     {
@@ -27,7 +27,7 @@ public class ValuesCollectionTester
 
     /**
      * Se a fine di ogni test vColl non è vuota, viene svuotata.
-     * */
+     */
     @After
     public void clear()
     {
@@ -40,7 +40,7 @@ public class ValuesCollectionTester
      * <b>Pre-condizioni</b>: oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10.
      * <br><br>
      * <b>Post-Condizioni</b>: Stampa su terminale i valori di getAMap().
-     * */
+     */
     @Test
     public void initializeTest()
     {
@@ -49,57 +49,55 @@ public class ValuesCollectionTester
 
     /**
      * Test del metodo     <b>public boolean add(Object o)</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Controllo che il metodo lanci UnsupportedOperationException se aggiungo un elemento.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: corretto comportamento del metodo.
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10.
-     *<br><br>
+     * <br><br>
      * <b>Post-Condizioni</b>: vColl torna ad essere vuota e di dimensione zero.
-     *<br><br>
+     * <br><br>
      * <b>Risultato Atteso</b>: il metodo conferma che non può essere utilizzato.
      */
     @Test
     public void addTest()
     {
-        assertThrows(UnsupportedOperationException.class, () -> {
-            vColl.add("test");});
+        assertThrows(UnsupportedOperationException.class, () -> vColl.add("test"));
     }
 
     /**
      * Test del metodo     <b>public boolean addAll(HCollection c)</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Controllo che il metodo lanci UnsupportedOperationException se aggiungo una collection.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: corretto comportamento del metodo.
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10.
-     *<br><br>
+     * <br><br>
      * <b>Post-Condizioni</b>: vColl torna ad essere vuota e di dimensione zero.
-     *<br><br>
+     * <br><br>
      * <b>Risultato Atteso</b>: il metodo conferma che non può essere utilizzato.
      */
     @Test
     public void addAllTest()
     {
-        assertThrows(UnsupportedOperationException.class, () -> {
-            vColl.addAll((HCollection) getACollection());});
+        assertThrows(UnsupportedOperationException.class, () -> vColl.addAll(getACollection()));
     }
 
     /**
      * Test del metodo     <b>public void clear()</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Controllo che la dimensione della collection sia effettivamente 10 all'inizio del test. Successivamente
      * chiamo il metodo clear e controllo che la dimensione sia pari a zero e che
      * quindi la collection sia stata correttamente svuotata.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: corretto svuotamento della collection con degli elementi.
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10.
-     *<br><br>
+     * <br><br>
      * <b>Post-Condizioni</b>: vColl torna ad essere vuoto e di dimensione zero.
-     *<br><br>
+     * <br><br>
      * <b>Risultato Atteso</b>: il metodo svuoterà correttamente la collection da qualsiasi valore contenuto all'interno portando
      * la dimensione di essa a zero.
      */
@@ -113,18 +111,18 @@ public class ValuesCollectionTester
 
     /**
      * Test del metodo     <b>public boolean contains(Object o)</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Controllo che i valori di vColl siano effettivamente contenuti in essa tramite un for che
      * scorre i valori di un toArray di vColl.
      * Infine controllo che chiamando il metodo con argomento nullo, lanci NullPointerException.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: corretto controllo della presenza di un valore in vColl. Controllo della corretta gestione dell'eccezione
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>:oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10 e che il
      * metodo get di Hashtable funzioni.
-     *<br><br>
+     * <br><br>
      * <b>Post-Condizioni</b>: vColl torna ad essere vuoto e di dimensione zero.
-     *<br><br>
+     * <br><br>
      * <b>Risultato Atteso</b>: Il metodo ritornerà true se il valore passato come argomento è contenuto nella collection,
      * altrimento false. Gestisce correttamente le eccezioni.
      */
@@ -134,26 +132,25 @@ public class ValuesCollectionTester
         for (int i = 0; i < vColl.size(); i++)
             assertTrue(vColl.contains(vColl.toArray()[i]));
 
-        assertThrows(NullPointerException.class, () -> {
-            vColl.contains(null);});
+        assertThrows(NullPointerException.class, () -> vColl.contains(null));
     }
 
     /**
      * Test del metodo     <b>public boolean containsAll(HCollection c)</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Creo due HCollection, test con gli stessi valori di vColl e test2 con alcuni valori non contenuti in vColl.
      * Controllo che non tutti i valori di test2 siano presenti in vColl, verifico tutti i valori di test siano
      * presenti in vColl e successivamente mi accerto di questo con un for che itera il metodo contains su vColl per tutti
      * i valori di test. Alla fine controllo che chiamando il metodo con una collection nulla o con un oggetto
      * non di tipo HCollection, mi lanci rispettivamente NullPointerException e ClassCastException.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: corretto controllo della presenza di tutti i valori in vColl. Controllo della corretta gestione
      * delle eccezioni.
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10.
-     *<br><br>
+     * <br><br>
      * <b>Post-Condizioni</b>: vColl torna ad essere vuoto e di dimensione zero.
-     *<br><br>
+     * <br><br>
      * <b>Risultato Atteso</b>: Il metodo ritornerà true se tutti i valori della collection passata sono contenuti in vColl,
      * altrimento false.
      */
@@ -171,27 +168,25 @@ public class ValuesCollectionTester
         for (int i = 0; i < vColl.size(); i++)
             assertTrue(vColl.contains(test.toArray()[i]));
 
-        assertThrows(NullPointerException.class, () -> {
-            vColl.containsAll(null);});
-        assertThrows(ClassCastException.class, () -> {
-            vColl.containsAll((HCollection) getAVector());});
+        assertThrows(NullPointerException.class, () -> vColl.containsAll(null));
+        assertThrows(ClassCastException.class, () -> vColl.containsAll((HCollection) getAVector()));
     }
 
     /**
      * Test del metodo     <b>public boolean isEmpty()</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Controllo che il metodo ritorni false quando ho verificato che la dimensione di vColl sia 10.
      * Svuoto vColl, controllo che la dimensione sia 0 e verifico che vColl torni ad essere vuota.
      * Alla fine creo un mappa con un solo elemento, genero la sua valuesCollection e controllo che non sia vuota e che la
      * dimensione sia effettivamente 1.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: verificare che la condizione di collection vuota equivalga alla sua dimensione pari a 0.
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10 e che il
      * metodo isEmpty di Hashtable funzioni.
-     *<br><br>
+     * <br><br>
      * <b>Post-Condizioni</b>: vColl torna ad essere vuota e di dimensione zero.
-     *<br><br>
+     * <br><br>
      * <b>Risultato Atteso</b>: Il metodo ritorna true se la collection è effettivamente vuota, false se contiene almeno un valore.
      */
     @Test
@@ -203,7 +198,7 @@ public class ValuesCollectionTester
         assertEquals(0, vColl.size());
         assertTrue(vColl.isEmpty());
         MapAdapter test = new MapAdapter();
-        test.put(1,1);
+        test.put(1, 1);
         HCollection testColl = test.values();
         assertFalse(testColl.isEmpty());
         assertEquals(1, testColl.size());
@@ -254,13 +249,13 @@ public class ValuesCollectionTester
         test1.remove();
         assertEquals(size - 1, vColl.size());
 
-        assertThrows(NoSuchElementException.class, () -> {test1.next();});
-        assertThrows(IllegalStateException.class, () -> {test1.remove();});
+        assertThrows(NoSuchElementException.class, test1::next);
+        assertThrows(IllegalStateException.class, test1::remove);
     }
 
     /**
      * Test del metodo     <b>public boolean remove(Object o)</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Istanzio due nuove variabili; un integer count per tener traccia dell'effettiva riduzione
      * della dimensione della collection ad ogni invocazione del metodo remove e un altro integer size per poter iterare
      * l'operazione di remove un numero di volte pari alla dimensione iniziale della collection. Itero queste azioni con un for.
@@ -269,16 +264,16 @@ public class ValuesCollectionTester
      * HCollection di valori. Questo mi permette di verificare che il metodo remove ritorni false se provo a invocarlo con un
      * valore non presente nella collection. Infine verifico il lancio della eccezione NullPointerException se viene invocato
      * con un oggetto null.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: verificare la corretta rimozione degli oggetti dalla collection in base al valore passato, la riduzione
      * della dimensione della collection in base al numero di volte che viene invocato il metodo e che gestisca correttamente
      * l'eccezione.
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10 e che il
      * remove di MapAdapter funzioni.
-     *<br><br>
+     * <br><br>
      * <b>Post-Condizioni</b>: vColl torna ad essere vuota e di dimensione zero.
-     *<br><br>
+     * <br><br>
      * <b>Risultato Atteso</b>: Il metodo ritorna true se il valore passato è presente nella collection rimuovendolo e
      * riducendone la dimensione di vColl,
      * altrimenti ritorna false. Gestisce correttamente l'eccezione.
@@ -305,13 +300,12 @@ public class ValuesCollectionTester
         assertFalse(vColl.remove(testSet.toArray()[0]));
         assertEquals(1, vColl.size());
 
-        assertThrows(NullPointerException.class, () -> {
-            vColl.remove(null);});
+        assertThrows(NullPointerException.class, () -> vColl.remove(null));
     }
 
     /**
      * Test del metodo     <b>public boolean removeAll(HCollection c)</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Creo due HCollection, test con gli stessi valori di vColl e test2 con nessun valore contenuto in vColl
      * e controllo che la dimensione di vColl sia effettivamente 10. Verifico che rimuovendo tutti i valori
      * della collection test da vColl, il metodo ritorni true e che la dimensione di quest'ultimo sia 0. Aggiungo a map,
@@ -322,15 +316,15 @@ public class ValuesCollectionTester
      * Infine verifico il lancio della eccezione NullPointerException se viene
      * invocato removeAll con una collection null e della eccezione ClassCastException se viene invocato con un
      * oggetto non di tipo HCollection.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: verificare la corretta rimozione di tutti i valori presenti nella collection passata dal vColl, la riduzione
      * della dimensione di vColl in base al numero di valori rimossi, che ritorni true solo se vengono effettuate
      * rimozioni e che gestisca correttamente le eccezioni.
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10.
-     *<br><br>
+     * <br><br>
      * <b>Post-Condizioni</b>: vColl torna ad essere vuota e di dimensione zero.
-     *<br><br>
+     * <br><br>
      * <b>Risultato Atteso</b>: Il metodo ritorna true se vengono effettuate delle rimozioni di valori (da vColl) presenti
      * sia nella collection passata che in vColl riducendone la dimensione in base al numero di valori rimossi,
      * altrimenti ritorna false se non vengono effettuate rimozioni. Gestisce correttamente le eccezioni.
@@ -353,15 +347,13 @@ public class ValuesCollectionTester
         assertFalse(vColl.removeAll(test2));
         assertEquals(10, vColl.size());
 
-        assertThrows(NullPointerException.class, () -> {
-            vColl.removeAll(null);});
-        assertThrows(ClassCastException.class, () -> {
-            vColl.removeAll((HCollection) getAVector());});
+        assertThrows(NullPointerException.class, () -> vColl.removeAll(null));
+        assertThrows(ClassCastException.class, () -> vColl.removeAll((HCollection) getAVector()));
     }
 
     /**
      * Test del metodo     <b>public boolean retainAll(HCollection c)</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Creo due HCollection, test con gli stessi valori di vColl e test3 con i primi 5 valori contenuti in vColl
      * e controllo che la dimensione di vColl sia effettivamente 10. Verifico che trattenendo tutti i valori
      * della collection test da vColl, il metodo ritorni false e che la dimensione di quest'ultimo sia ancora 10 poiché
@@ -375,16 +367,16 @@ public class ValuesCollectionTester
      * metodo poiché il metodo ha rimosso i cinque valori di tipo string presenti in vColl. Infine verifico il lancio della eccezione
      * NullPointerException se viene invocato retainAll con una collection null e della eccezione ClassCastException se
      * viene invocato con un oggetto non di tipo HCollection.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: verificare il corretto mantenimento di tutti gli Entry con i valori presenti nella collection passata da vColl, e quindi la
      * rimozione da questo dei valori non presenti nella collection, la riduzione della dimensione di vColl in
      * base al numero di valori rimossi, che ritorni true solo se vengono effettuate rimozioni e che gestisca
      * correttamente le eccezioni.
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10.
-     *<br><br>
+     * <br><br>
      * <b>Post-Condizioni</b>: vColl torna ad essere vuoto e di dimensione zero.
-     *<br><br>
+     * <br><br>
      * <b>Risultato Atteso</b>: Il metodo ritorna true se vengono effettuate delle rimozioni di valori (dal set) non presenti
      * nella collection riducendone la dimensione in base al numero di valori rimossi, altrimenti ritorna false se
      * non vengono effettuate rimozioni. Gestisce correttamente le eccezioni.
@@ -407,28 +399,26 @@ public class ValuesCollectionTester
 
         assertEquals(size / 2, vColl.size());
 
-        assertThrows(NullPointerException.class, () -> {
-            vColl.retainAll(null);});
-        assertThrows(ClassCastException.class, () -> {
-            vColl.retainAll((HCollection) getAVector());});
+        assertThrows(NullPointerException.class, () -> vColl.retainAll(null));
+        assertThrows(ClassCastException.class, () -> vColl.retainAll((HCollection) getAVector()));
     }
 
     /**
      * Test del metodo     <b>public int size()</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Creo un iteratore di vColl e lo scorro in un while finché ha valori. Ad ogni iterazione incremento la
      * variabile count che tiene traccia della dimensione di vColl, verifico che a fine ciclo sia effettivamente della
      * dimensione di vColl (ossia 10). Rimuovo un valore con il remove dell'iteratore e verifico che la dimensione di vColl
      * sia diminuita di una unità. Infine svuoto vColl e controllo che la sua dimensione sia tornata a 0.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: verificare la corretteza del metodo size controllando la coerenza di esso con un confronto con una
      * variabile che riproduce lo stesso meccanismo del metodo.
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10 e che il
      * metodo size di Hashtable funzioni.
-     *<br><br>
+     * <br><br>
      * <b>Post-Condizioni</b>: vColl torna ad essere vuoto e di dimensione zero.
-     *<br><br>
+     * <br><br>
      * <b>Risultato Atteso</b>: Il metodo ritorna l'effettiva dimensione della collection.
      */
     @Test
@@ -437,7 +427,7 @@ public class ValuesCollectionTester
         HIterator iter = vColl.iterator();
 
         int count = 0;
-        while(iter.hasNext())
+        while (iter.hasNext())
         {
             count++;
             iter.next();
@@ -453,19 +443,19 @@ public class ValuesCollectionTester
 
     /**
      * Test del metodo     <b>public Object[] toArray()</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Istanzio un nuovo array test di Object della dimesione di vColl e ci copio all'interno un valore per
      * ogni iterazione di un for che scorre gli indici al contrario, poiché l'iteratore naviga nella collection in ordine
      * inverso (per definizione di Enumeration). Verifico che tutti i valori di test siano presenti in vColl tramite un for.
      * Infine verifico che test sia uguale all'array ritornato dal metodo toArray.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: verificare che il metodo ritorni effettivamente un array con tutti i valori di vColl nell'ordine
      * corretto.
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10.
-     *<br><br>
+     * <br><br>
      * <b>Post-Condizioni</b>: vColl torna ad essere vuoto e di dimensione zero.
-     *<br><br>
+     * <br><br>
      * <b>Risultato Atteso</b>: il metodo ritorna correttamente un array con tutti i valori di vColl.
      */
     @Test
@@ -486,7 +476,7 @@ public class ValuesCollectionTester
 
     /**
      * Test del metodo     <b>public Object[] toArray()</b>
-     *<br><br>
+     * <br><br>
      * <b>Sommario</b>: Istanzio tre nuovi array di
      * Object; il primo, test,  della dimesione di vColl, il secondo, test1, della dimensione di (vColl + 5) e il terzo,
      * test2, della dimensione di (vColl - 5). Dentro test copio tutti i valori di vColl, uno per
@@ -498,16 +488,16 @@ public class ValuesCollectionTester
      * di test. Eseguo la stessa cosa con il terzo array, salvandomi però l'array ritornato dal metodo in un
      * nuovo array di Object test2_1 poiché la dimensione di test2 è minore rispetto alla dimensione di vColl. Infine
      * verifico che venga lanciata l'eccezione NullPointerException se l'array passato come argomento è null.
-     *<br><br>
+     * <br><br>
      * <b>Design</b>: verificare che il metodo ritorni effettivamente un array con tutti i valori della collection nell'ordine
      * corretto se la dimensione di quello passato per argomento è minore rispetto a quella della collection o che sovrascriva
      * i dati di quello passato per argomento se la sua dimensione è maggiore o uguale a quella della collection. Verificare
      * la corretta gestione del'eccezione.
-     *<br><br>
+     * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HCollection correttamente inizializzato con dimensione uguale a 10.
-     *<br><br>
+     * <br><br>
      * <b>Post-Condizioni</b>: vColl torna ad essere vuoto e di dimensione zero.
-     *<br><br>
+     * <br><br>
      * <b>Risultato Atteso</b>: il metodo ritorna correttamente un array con tutti i valori della collection o sovrascrive i
      * dati di quello passato come argomento in base alla dimensione di quest'ultimo.
      */
@@ -536,8 +526,7 @@ public class ValuesCollectionTester
         for (int i = vColl.size() - 1; i >= 0; i--)
             assertEquals(test[i], test2_1[i]);
 
-        assertThrows(NullPointerException.class, () -> {
-            vColl.toArray(null);});
+        assertThrows(NullPointerException.class, () -> vColl.toArray(null));
     }
 
     /**
@@ -654,7 +643,7 @@ public class ValuesCollectionTester
             l.add(i, i);
 
         for (int i = 5; i < 10; i++)
-            l.add(i, "stringa " + (i-4));
+            l.add(i, "stringa " + (i - 4));
 
         return l;
     }

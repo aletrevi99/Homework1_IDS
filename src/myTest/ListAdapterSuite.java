@@ -8,6 +8,7 @@ import org.junit.runners.Suite;
         ListAdapterTester.class,
         SubListAdapterTester.class
 })
-public class ListAdapterSuite {
+public class ListAdapterSuite
+{
 
 }

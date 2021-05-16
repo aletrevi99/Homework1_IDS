@@ -10,7 +10,8 @@ import java.util.NoSuchElementException;
  * semantics.<br>
  * - Method names have been improved.
  */
-public interface HIterator {
+public interface HIterator
+{
     /**
      * Returns true if the iteration has more elements. (In other words, returns
      * true if next would return an element rather than throwing an exception.)

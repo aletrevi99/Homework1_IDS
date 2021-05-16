@@ -857,7 +857,7 @@ public class MapAdapter implements HMap
 
             HIterator iter = iterator();
 
-            while(iter.hasNext())
+            while (iter.hasNext())
                 if ((iter.next()).equals(o))
                     return true;
 
@@ -904,7 +904,7 @@ public class MapAdapter implements HMap
 
             HIterator iter = iterator();
 
-            while(iter.hasNext())
+            while (iter.hasNext())
                 if (iter.next() == o)
                 {
                     iter.remove();

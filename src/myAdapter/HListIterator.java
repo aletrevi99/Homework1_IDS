@@ -11,7 +11,8 @@ import java.util.NoSuchElementException;
  * Note that the remove() and set(Object) methods are not defined in terms of the cursor position; they are defined to
  * operate on the last element returned by a call to next() or previous().
  */
-public interface HListIterator extends HIterator {
+public interface HListIterator extends HIterator
+{
     /**
      * Inserts the specified element into the list (optional operation). The element
      * is inserted immediately before the next element that would be returned by
@@ -39,9 +40,9 @@ public interface HListIterator extends HIterator {
      * in the forward direction. (In other words, returns true if next would return
      * an element rather than throwing an exception.)
      *
-     * @implSpec hasNext in interface Iterator
      * @return true if the list iterator has more elements when traversing the list
-     *         in the forward direction.
+     * in the forward direction.
+     * @implSpec hasNext in interface Iterator
      */
     boolean hasNext();
 
@@ -51,7 +52,7 @@ public interface HListIterator extends HIterator {
      * return an element rather than throwing an exception.)
      *
      * @return true if the list iterator has more elements when traversing the list
-     *         in the reverse direction.
+     * in the reverse direction.
      */
     boolean hasPrevious();
 
@@ -61,9 +62,9 @@ public interface HListIterator extends HIterator {
      * forth. (Note that alternating calls to next and previous will return the same
      * element repeatedly.)
      *
-     * @implSpec next in interface Iterator
      * @return the next element in the list.
      * @throws NoSuchElementException - if the iteration has no next element.
+     * @implSpec next in interface Iterator
      */
     Object next();
 
@@ -72,7 +73,7 @@ public interface HListIterator extends HIterator {
      * to next. (Returns list size if the list iterator is at the end of the list.)
      *
      * @return the index of the element that would be returned by a subsequent call
-     *         to next, or list size if list iterator is at end of list.
+     * to next, or list size if list iterator is at end of list.
      */
     int nextIndex();
 
@@ -93,7 +94,7 @@ public interface HListIterator extends HIterator {
      * list.)
      *
      * @return the index of the element that would be returned by a subsequent call
-     *         to previous, or -1 if list iterator is at beginning of list.
+     * to previous, or -1 if list iterator is at beginning of list.
      */
     int previousIndex();
 
@@ -103,13 +104,13 @@ public interface HListIterator extends HIterator {
      * previous. It can be made only if ListIterator.add has not been called after
      * the last call to next or previous.
      *
-     * @implSpec remove in interface Iterator
      * @throws UnsupportedOperationException - if the remove operation is not
      *                                       supported by this list iterator.
      * @throws IllegalStateException         - neither next nor previous have been
      *                                       called, or remove or add have been
      *                                       called after the last call to * next or
      *                                       previous.
+     * @implSpec remove in interface Iterator
      */
     void remove();
 

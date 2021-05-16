@@ -36,7 +36,7 @@ public class MapAdapterTester
      * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo MapAdapter correttamente inizializzato con dimensione uguale a zero.
      * <br><br>
-     * <b>Post-Condizioni</b>: Stampa su terminale i valori di getAMap().
+     * <b>Post-Condizioni</b>: n/a
      */
     @Test
     public void initializeTest()

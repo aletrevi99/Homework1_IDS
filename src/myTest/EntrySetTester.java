@@ -40,7 +40,7 @@ public class EntrySetTester
      * <br><br>
      * <b>Pre-condizioni</b>: oggetto di tipo HSet correttamente inizializzato con dimensione uguale a 10.
      * <br><br>
-     * <b>Post-Condizioni</b>: Stampa su terminale i valori di getAMap().
+     * <b>Post-Condizioni</b>: n/a
      */
     @Test
     public void initializeTest()
